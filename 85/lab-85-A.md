@@ -2,6 +2,8 @@
 
 `CodeReady Containers (crc)` es una herramienta de desarrollo proporcionada por Red Hat que permite a los desarrolladores ejecutar una versión ***local de OpenShift***, la plataforma de Kubernetes de Red Hat. Esta herramienta facilita la creación de entornos de desarrollo locales que son consistentes con los entornos de producción basados en OpenShift. 
 
+CodeReady Containers ha sido renombrado a `OpenShift Local`, aunque es la misma herramienta. Sigue proporcionando una manera sencilla de ejecutar un clúster de OpenShift en una máquina local para facilitar el desarrollo y las pruebas.
+
 ## Características principales de CodeReady Containers:
 
 1. **Despliegue Local de OpenShift**: Permite a los desarrolladores desplegar una instancia de OpenShift en sus máquinas locales, facilitando el desarrollo y pruebas de aplicaciones en un entorno similar al de producción.
@@ -26,14 +28,46 @@ Requisitos:
 1. Una máquina virtual con `CentOS 8` o superior: `32 GB` de disco disponibles en `/home`. `4 cores` y `9GB` de RAM.
 
 
-## Ejercicio 1: Instalación de ***Docker*** 
+## Ejercicio 1: Instalación de ***OpenShift local*** 
 
 Procedemos a instalar actualizar los paquetes de CentOS.
+
 ```
 su -
 ```
 
 ```
-dnf update
+dnf update -y
 ```
 
+Procedemos a instalar las depencencias. Estas son:
+
+- `Network Manager`: Es una utilidad de software diseñada para simplificar la gestión de redes en sistemas operativos Linux. NetworkManager puede detectar automáticamente las redes disponibles y conectarse a la red más apropiada basada en la configuración y las preferencias del usuario. Permite la conmutación automática entre redes inalámbricas y cableadas. Proporciona tanto herramientas de línea de comandos (`nmcli`) como interfaces gráficas (`nm-applet` y configuraciones en entornos de escritorio para `GNOME` y `KDE`).
+
+- `libvirt`: Es una colección de herramientas y una API diseñada para gestionar plataformas de virtualización. Proporciona una interfaz unificada para interactuar con diversos hipervisores incluído `VirtualBox`, permitiendo a los usuarios crear, modificar y controlar máquinas virtuales y recursos asociados de manera eficiente. 
+
+```
+sudo dnf install NetworkManager libvirt -y
+```
+
+Es el momento de descargar los paquetes de OpenShit. Para ello necesitamos disponer de una cuenta en RedHat.
+
+A continuación nos conectamos a la consola. Con el navegador, conectamos con la siguiente URL.
+```
+https://console.redhat.com/openshift/create/local
+```
+
+Aparecerá una página con las instrucciones de instalación. 
+
+![consola](../img/202405301842.png)
+
+Hacemos clic en el botón `Download OpenShift Local`, indicado en la siguiente imagen. 
+
+![consola](../img/202405301846.png)
+
+
+
+
+ 
+
+https://www.youtube.com/watch?v=skOohvvPBys
