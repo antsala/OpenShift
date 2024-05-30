@@ -63,7 +63,7 @@ Aparecerá una página con las instrucciones de instalación.
 
 Hacemos clic en el botón `Download OpenShift Local`, indicado en la siguiente imagen. 
 
-![consola](../img/202405301846.png)
+![Download crc](../img/202405301846.png)
 
 Asumiendo que el archivo se ha descargado en `Downloads`, ejecutamos los siguientes comandos:
 
@@ -86,12 +86,38 @@ cp ~/Downloads/crc-linux-*-amd64/crc ~/bin
 
 Añadimos el directorio `~/bin` a `$PATH`.
 ```
-$ export PATH=$PATH:$HOME/bin
+export PATH=$PATH:$HOME/bin
 ```
 
 ```
-$ echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
+echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
 ```
+
+Ahora debemos descargar el `Pull secret`. Básicamente es la información de autenticación que necesitaremos para conectar con el cluster. Hacemos clic en el botón correspondiente.
+
+![Pull secret](../img/202405301846.png)
+
+Comprobamos que se ha descargado el secreto.
+```
+cd ~
+```
+
+```
+ls -l ~/Downloads/pull-secret 
+```
+
+![ls secret](../img/202405301913.png)
+
+Si tienes curiosidad, puedes ver su contenido.
+```
+cat  ~/Downloads/pull-secret 
+```
+
+Obtendrás algo como esto.
+![secret](../img/202405301918.png)
+
+
+
 
 
 
