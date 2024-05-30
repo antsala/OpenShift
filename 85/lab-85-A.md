@@ -50,7 +50,7 @@ Abrir una terminal en la carpeta de instalación de VirtualBox, habitualmente `C
 
 Ejecutar el siguiente comando, ajustando en nombre de la VM a conveniencia.
 ```
-.\VBoxManage.exe modifyvm "Centos-8 OpenShift Local (crc)" --nested-hw-virt on
+.\VBoxManage.exe modifyvm "CentOS-8 CodeReady Containers (crc)" --nested-hw-virt on
 ```
 Una vez hecho esto, y con la VM apagada, podemos acceder y activar la casilla de verificación de
 
