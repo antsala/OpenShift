@@ -25,7 +25,7 @@ CodeReady Containers ha sido renombrado a `OpenShift Local`, aunque es la misma 
 
 Requisitos:
 
-1. Una máquina virtual con `CentOS 8` o superior: `35 GB` de disco disponibles en `/home`. `4 cores` y `14 GB` de RAM.
+1. Una máquina virtual con `CentOS 8` o superior. `100 GB` de disco disponible. `4 cores` y `14 GB` de RAM.
 
 Nota: `crc` requiere 11.3 GB de RAM, pero es conveniente dotar a la VM de algo más, por eso recomendamos 14 GB.
 
@@ -50,7 +50,7 @@ Abrir una terminal en la carpeta de instalación de VirtualBox, habitualmente `C
 
 Ejecutar el siguiente comando, ajustando en nombre de la VM a conveniencia.
 ```
-.\VBoxManage.exe modifyvm "CentOS-8 CodeReady Containers (crc)" --nested-hw-virt on
+.\VBoxManage.exe modifyvm "Centos-8 OpenShift Local (crc)" --nested-hw-virt on
 ```
 Una vez hecho esto, y con la VM apagada, podemos acceder y activar la casilla de verificación de
 
