@@ -44,7 +44,7 @@ Procedemos a instalar las depencencias. Estas son:
 
 - `Network Manager`: Es una utilidad de software diseñada para simplificar la gestión de redes en sistemas operativos Linux. NetworkManager puede detectar automáticamente las redes disponibles y conectarse a la red más apropiada basada en la configuración y las preferencias del usuario. Permite la conmutación automática entre redes inalámbricas y cableadas. Proporciona tanto herramientas de línea de comandos (`nmcli`) como interfaces gráficas (`nm-applet` y configuraciones en entornos de escritorio para `GNOME` y `KDE`).
 
-- `libvirt`: Es una colección de herramientas y una API diseñada para gestionar plataformas de virtualización. Proporciona una interfaz unificada para interactuar con diversos hipervisores incluído `VirtualBox`, permitiendo a los usuarios crear, modificar y controlar máquinas virtuales y recursos asociados de manera eficiente. 
+- `libvirt`: Es una colección de herramientas y una API diseñada para gestionar plataformas de virtualización. Proporciona una interfaz unificada para interactuar con diversos hipervisores incluido `VirtualBox`, permitiendo a los usuarios crear, modificar y controlar máquinas virtuales y recursos asociados de manera eficiente. 
 
 ```
 sudo dnf install NetworkManager libvirt -y
@@ -72,26 +72,25 @@ cd ~/Downloads/
 ```
 
 ```
-tar xvf crc-linux-amd64.tar.xz 
+tar -xvf crc-linux-amd64.tar.xz 
 ```
 
-Creamos el directorio `~/bin` y copiamos el ejecutable `crc` (CodeReade Containers) en él.
-```
-mkdir -p ~/bin
-```
+El ejecutable es `crc`. Vamos a copiarlo a una ruta dentro de `$PATH`.
 
 ```
-cp ~/Downloads/crc-linux-*-amd64/crc ~/bin
+sudo cp ~/Downloads/crc-linux-*-amd64/crc /usr/lobal/bin/crc
 ```
 
-Añadimos el directorio `~/bin` a `$PATH`.
+Lo hacemos ejecutable 
 ```
-export PATH=$PATH:$HOME/bin
+sudo chmod +x /usr/local/bin/crc
 ```
 
+Comprobamos que sea ejecutable.
 ```
-echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
+ls -l /usr/local/bin/crc
 ```
+
 
 Ahora debemos descargar el `Pull secret`. Básicamente es la información de autenticación que necesitaremos para conectar con el cluster. Hacemos clic en el botón correspondiente.
 
@@ -114,7 +113,10 @@ cat  ~/Downloads/pull-secret
 ```
 
 Obtendrás algo como esto.
+
 ![secret](../img/202405301918.png)
+
+
 
 
 
