@@ -61,11 +61,7 @@ Una vez hecho esto, y con la VM apagada, podemos acceder y activar la casilla de
 Procedemos a instalar actualizar los paquetes de CentOS.
 
 ```
-su -
-```
-
-```
-dnf update -y
+sudo dnf update -y
 ```
 
 Procedemos a instalar las depencencias. Estas son:
@@ -122,7 +118,7 @@ ls -l /usr/local/bin/crc
 
 Ahora debemos descargar el `Pull secret`. Básicamente es la información de autenticación que necesitaremos para conectar con el cluster. Hacemos clic en el botón correspondiente.
 
-![Pull secret](../img/202405301846.png)
+![Pull secret](../img/202405301908.png)
 
 Comprobamos que se ha descargado el secreto.
 ```
