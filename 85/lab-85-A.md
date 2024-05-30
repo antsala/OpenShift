@@ -84,6 +84,15 @@ mkdir -p ~/bin
 cp ~/Downloads/crc-linux-*-amd64/crc ~/bin
 ```
 
+Añadimos el directorio `~/bin` a `$PATH`.
+```
+$ export PATH=$PATH:$HOME/bin
+```
+
+```
+$ echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
+```
+
 
 
 
