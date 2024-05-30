@@ -25,7 +25,7 @@ CodeReady Containers ha sido renombrado a `OpenShift Local`, aunque es la misma 
 
 Requisitos:
 
-1. Una máquina virtual con `CentOS 8` o superior: `32 GB` de disco disponibles en `/home`. `4 cores` y `9GB` de RAM.
+1. Una máquina virtual con `CentOS 8` o superior: `35 GB` de disco disponibles en `/home`. `4 cores` y `11 GB` de RAM.
 
 
 ## Ejercicio 1: Instalación de ***OpenShift local*** 
@@ -64,6 +64,25 @@ Aparecerá una página con las instrucciones de instalación.
 Hacemos clic en el botón `Download OpenShift Local`, indicado en la siguiente imagen. 
 
 ![consola](../img/202405301846.png)
+
+Asumiendo que el archivo se ha descargado en `Downloads`, ejecutamos los siguientes comandos:
+
+```
+cd ~/Downloads/
+```
+
+```
+tar xvf crc-linux-amd64.tar.xz 
+```
+
+Creamos el directorio `~/bin` y copiamos el ejecutable `crc` (CodeReade Containers) en él.
+```
+mkdir -p ~/bin
+```
+
+```
+cp ~/Downloads/crc-linux-*-amd64/crc ~/bin
+```
 
 
 
