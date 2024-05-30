@@ -34,17 +34,17 @@ Nota: `crc` requiere 11.3 GB de RAM, pero es conveniente dotar a la VM de algo m
 
 ## Ejercicio 1: Habilitación de la ***virtualización anidada*** en la VM CentOS 8.
 
-Como requisito fundamental, la VM donde estamos configurando `crc` necesita tener la virtualización de segundo nivel o anidada activa. Para ello debemos comprobar que la casilla de verificación correspondiente está activa, tal y como muestra la siguiente imagen.
+Como requisito fundamental, la VM donde estamos configurando `crc` necesita que la virtualización de segundo nivel o anidada esté activa. Para ello debemos comprobar que la casilla de verificación correspondiente esté marcada, tal y como muestra la siguiente imagen.
 
 ![VT-x](../img/202405302004.png)
 
 Puede ocurrir tres escenarios:
 
-1. La casilla de verificación está seleccionada. En este caso no debemos hacer nada.
+1. La casilla de verificación está seleccionada. En este caso no debemos hacer nada. Pasamos al siguiente ejercicio.
 
-2. La casilla de verificación no está seleccionada y no está deshabilitada. En este caso debemos activarla.
+2. La casilla de verificación no está seleccionada y no está deshabilitada. En este caso debemos activarla. Pasamos al siguiente ejercicio.
 
-3. La casilla de verificación no está seleccionada y se encuentra deshabilitada. Aquí debemos hacer una intervención manual en VirtualBox para conseguir habilitar la virtualización anidada. Los pasos a realizar son los siguientes.
+3. La casilla de verificación no está seleccionada y se ***encuentra deshabilitada***. Aquí debemos hacer una intervención manual en VirtualBox para conseguir habilitar la virtualización anidada. Los pasos a realizar son los siguientes.
 
 Abrir una terminal en la carpeta de instalación de VirtualBox, habitualmente `C:\Program Files\Oracle\VirtualBox`. 
 
@@ -144,6 +144,12 @@ Obtendrás algo como esto.
 
 ![secret](../img/202405301918.png)
 
+Vamos a mover el secreto al directorio `home` para no perderlo.
+```
+mv ~/Downloads/pull-secret ~
+```
+
+
 
 Ahora debemos configurar `crc`. Para ello vamos a iniciarlo, y decidir si habilitamos o no la recolección de datos para enviarlos a RedHat. En este escenario decidimos que sí.
 ```
@@ -151,6 +157,9 @@ crc config set consent-telemetry yes
 ```
 
 Es el momento de utilizar la herramienta de configuración de `crc` para descargarnos en nuestro equipos los archivos de `OpenShift Local`.
+
+Nota: Tardará aproximadamente 10-15 minutos.
+
 ```
 crc setup
 ```
