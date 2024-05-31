@@ -108,20 +108,23 @@ crc config set consent-telemetry yes
 
 Es el momento de utilizar la herramienta de configuración de `crc` para descargarnos en nuestro equipos los archivos de `OpenShift Local`.
 
-Nota: Tardará aproximadamente 10-15 minutos.
+Nota: Tardará aproximadamente 10 minutos.
 
 ```
 crc setup
 ```
+El asistente realizará unas comprobaciones previas, descargará y descomprimirá la VM de OpenShift Containers.
 
 ![crc setup](../img/202405311011.png)
 
 Es el momento de iniciar el cluster, para ello usamos el siguiente comando.
-Nota: Tarda unos 10 minutos. 10:10
+Nota: Tarda unos 10 minutos. 10:20
 ```
-crc start -p pull-secret
+crc start -p "C:\Users\Antonio\OneDrive - AVANTE FORMACION\Cursos\Containers\Openshift\pull-secret.txt"
 ```
 
+Se crea la VM eh Hyper-V y se inicarán los servicios del cluster.
+
+![crc starttup](../img/2024053110223.png)
 
 
-https://www.youtube.com/watch?v=skOohvvPBys
