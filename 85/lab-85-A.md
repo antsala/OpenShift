@@ -125,6 +125,10 @@ crc start -p "C:\Users\Antonio\OneDrive - AVANTE FORMACION\Cursos\Containers\Ope
 
 Se crea la VM eh Hyper-V y se inicarán los servicios del cluster.
 
-![crc starttup](../img/2024053110223.png)
+![Hyper-V memoria](../img/2024053110227.png)
+
+Como anuncimos, se requieren 4 cores.
+
+![Hyper-V cpus](../img/2024053110229.png)
 
 
