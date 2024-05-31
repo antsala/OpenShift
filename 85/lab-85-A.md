@@ -101,10 +101,7 @@ Al finalizar la instalación debemos `reiniciar el equipo`.
 ![Reiniciar equipo](../img/202405310953.png)
 
 
-
-
-
-Ahora debemos configurar `crc`. Para ello vamos a iniciarlo, y decidir si habilitamos o no la recolección de datos para enviarlos a RedHat. En este escenario decidimos que sí.
+Ahora debemos configurar `crc`. Para ello vamos a iniciarlo, y decidir si habilitamos o no la recolección de datos para enviarlos a RedHat. En este escenario decidimos que sí. En una terminal de comandos, escribimos.
 ```
 crc config set consent-telemetry yes
 ```
@@ -117,8 +114,10 @@ Nota: Tardará aproximadamente 10-15 minutos.
 crc setup
 ```
 
+![crc setup](../img/202405311011.png)
+
 Es el momento de iniciar el cluster, para ello usamos el siguiente comando.
-Nota: Tarda unos 10 minutos. 23:58
+Nota: Tarda unos 10 minutos. 10:10
 ```
 crc start -p pull-secret
 ```
