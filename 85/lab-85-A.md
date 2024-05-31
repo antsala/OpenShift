@@ -98,7 +98,7 @@ Ejecútalo y sigue los pasos del asistente.
 
 Al finalizar la instalación debemos `reiniciar el equipo`.
 
-
+![Reiniciar equipo](../img/202405310953.png)
 
 
 
