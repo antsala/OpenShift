@@ -118,7 +118,7 @@ El asistente realizará unas comprobaciones previas, descargará y descomprimir�
 ![crc setup](../img/202405311011.png)
 
 Es el momento de iniciar el cluster, para ello usamos el siguiente comando.
-Nota: Tarda unos 10 minutos. 10:20
+Nota: Tarda unos 10 minutos. 
 ```
 crc start -p "C:\Users\Antonio\OneDrive - AVANTE FORMACION\Cursos\Containers\Openshift\pull-secret.txt"
 ```
@@ -127,8 +127,14 @@ Se crea la VM eh Hyper-V y se inicarán los servicios del cluster.
 
 ![Hyper-V memoria](../img/2024053110227.png)
 
-Como anuncimos, se requieren 4 cores.
+Como anunciamos, se requieren 4 cores.
 
 ![Hyper-V cpus](../img/2024053110229.png)
+
+Cuando el cluster sea estable, se mostrará la información de conexión, tal y como podemos ver en la siguiente imagen.
+
+![Conexión](../img/2024053110232.png)
+
+
 
 
