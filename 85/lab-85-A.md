@@ -238,7 +238,10 @@ Desinstalar `OpenShift Local` desde agregar y quitar programas.
 
 ![Agregar o quitar programas](../img/202405311127.png)
 
-comprobar que se borran los archivos descargados. y hacer una desinstalación completa. Ver ".crc" en home.
+Es necesario eliminar los archivos descargados, el vhdx de la VM, y otras configuraciones remanentes. Estos se encuentran en el directorio `.crc` en el directorio del usuario. Procedemos a su eliminación.
 
+```
+rmdir %HOMEPATH%\.crc /s /q
+```
 
-
+Con esto quedará completamente desinstalado.
