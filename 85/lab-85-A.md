@@ -85,7 +85,7 @@ Obtendrás algo como esto.
 ![secret](../img/202405310942.png)
 
 
-Vamos a mover el secreto al un directorio mejor para que no se pierda. Elige el directorio que más te guste.
+Vamos a mover el secreto a un directorio mejor para que no se pierda. Elige el directorio que más te guste.
 
 Una vez descomprimido el instalador, verás el correspondiente archivo `msi`.
 
@@ -96,7 +96,7 @@ Ejecútalo y sigue los pasos del asistente.
 
 ![Asistente instalación](../img/202405310947.png)
 
-Al finalizar la instalación debemos reiniciar el equipo.
+Al finalizar la instalación debemos `reiniciar el equipo`.
 
 
 
