@@ -22,128 +22,85 @@ CodeReady Containers ha sido renombrado a `OpenShift Local`, aunque es la misma 
 
 - **Facilita la Adopción de OpenShift**: Para equipos que ya están usando o planean usar OpenShift en producción, CodeReady Containers es una herramienta ideal para familiarizarse con la plataforma y sus características.
 
+En esta URL: https://access.redhat.com/documentation/en-us/red_hat_openshift_local/2.4/html/getting_started_guide/index tienes la documentación del producto.
+
 
 Requisitos:
 
-1. Una máquina virtual con `CentOS 8` o superior. `100 GB` de disco disponible. `4 cores` y `14 GB` de RAM.
-
-Nota: `crc` requiere 11.3 GB de RAM, pero es conveniente dotar a la VM de algo más, por eso recomendamos 14 GB.
-
-2. La VM de VirtualBox debe tener la virtualización anidada activada. Esta configuración se repasa en el primer ejercicio del laboratorio.
+1. Una máquina `física` con `Windows 10 Fall Creators Update (version 1709)` o posterior. No se soporta la edición `Home`. Para `OpenShift Local` se requieren `4 cores`, `9 GB` de RAM y `35 GB` de disco. Para el runtime `Podman` se necesitan `2 cores`, `2 GB` de RAM y `35 GB`de disco. En consecuencia, los recursos mínimos son: `6 cores`, `12 GB` RAM y `70 GB` disco.
 
 
-## Ejercicio 1: Habilitación de la ***virtualización anidada*** en la VM CentOS 8.
+2. OpenShift local no soporta la virtualización anidada, por lo que no puede instalarse en una VM guest y se requiere instalación en el dispositivo físico. Para Windows se requiere la característica `Hyper-V`. El asistente de instalación creará una VM en Hyper-V que hospeda los servicios de OpenShift Local.
 
-Como requisito fundamental, la VM donde estamos configurando `crc` necesita que la virtualización de segundo nivel o anidada esté activa. Para ello debemos comprobar que la casilla de verificación correspondiente esté marcada, tal y como muestra la siguiente imagen.
 
-![VT-x](../img/202405302004.png)
+## Ejercicio 1: Instalación de ***OpenShift local*** 
 
-Puede ocurrir tres escenarios:
+En primer lugar debemos asegurarnos que el usuario con el que hemos iniciado sesión en Windows es miembro del grupo `Administradores de Hyper-V`. Para ello, abrimos la consola de `administración de equipos` y hacemos doble clic en el usuario apropiado.
 
-1. La casilla de verificación está seleccionada. En este caso no debemos hacer nada. Pasamos al siguiente ejercicio.
+![Administración de equipos](../img/202405310925.png)
 
-2. La casilla de verificación no está seleccionada y no está deshabilitada. En este caso debemos activarla. Pasamos al siguiente ejercicio.
+y lo agregamos al grupo `Administradores de Hyper-V`.
 
-3. La casilla de verificación no está seleccionada y se ***encuentra deshabilitada***. Aquí debemos hacer una intervención manual en VirtualBox para conseguir habilitar la virtualización anidada. Los pasos a realizar son los siguientes.
+![Agregar a grupo](../img/202405310929.png)
 
-Abrir una terminal en la carpeta de instalación de VirtualBox, habitualmente `C:\Program Files\Oracle\VirtualBox`. 
-
-Ejecutar el siguiente comando, ajustando en nombre de la VM a conveniencia.
+En la terminal, comprobamos que somos miembros del grupo.
 ```
-.\VBoxManage.exe modifyvm "CentOS-8 CodeReady Containers (crc)" --nested-hw-virt on
-```
-Una vez hecho esto, y con la VM apagada, podemos acceder y activar la casilla de verificación de
-
-
-
-## Ejercicio 2: Instalación de ***OpenShift local*** 
-
-Procedemos a instalar actualizar los paquetes de CentOS.
-
-```
-sudo dnf update -y
+net localgroup
 ```
 
-Procedemos a instalar las depencencias. Estas son:
+El resultado debe ser similar al mostrado en la siguiente imagen.
 
-- `Network Manager`: Es una utilidad de software diseñada para simplificar la gestión de redes en sistemas operativos Linux. NetworkManager puede detectar automáticamente las redes disponibles y conectarse a la red más apropiada basada en la configuración y las preferencias del usuario. Permite la conmutación automática entre redes inalámbricas y cableadas. Proporciona tanto herramientas de línea de comandos (`nmcli`) como interfaces gráficas (`nm-applet` y configuraciones en entornos de escritorio para `GNOME` y `KDE`).
+![Miembro de](../img/202405310932.png)
 
-- `libvirt`: Es una colección de herramientas y una API diseñada para gestionar plataformas de virtualización. Proporciona una interfaz unificada para interactuar con diversos hipervisores incluido `VirtualBox`, permitiendo a los usuarios crear, modificar y controlar máquinas virtuales y recursos asociados de manera eficiente. 
 
-```
-sudo dnf install NetworkManager libvirt -y
-```
-
-Es el momento de descargar los paquetes de OpenShit. Para ello necesitamos disponer de una cuenta en RedHat.
+Es el momento de descargar los paquetes de OpenShit. Para ello necesitamos disponer de una `cuenta en RedHat`.
 
 A continuación nos conectamos a la consola. Con el navegador, conectamos con la siguiente URL.
 ```
 https://console.redhat.com/openshift/create/local
 ```
 
-Aparecerá una página con las instrucciones de instalación. 
-
-![consola](../img/202405301842.png)
-
 Hacemos clic en el botón `Download OpenShift Local`, indicado en la siguiente imagen. 
 
-![Download crc](../img/202405301846.png)
+![Download crc](../img/202405310935.png)
 
-Asumiendo que el archivo se ha descargado en `Downloads`, ejecutamos los siguientes comandos:
-
-```
-cd ~/Downloads/
-```
-
-```
-tar -xvf crc-linux-amd64.tar.xz 
-```
-
-El ejecutable es `crc`. Vamos a copiarlo a una ruta dentro de `$PATH`.
-
-```
-sudo cp ~/Downloads/crc-linux-*-amd64/crc /usr/local/bin/crc
-```
-
-Lo hacemos ejecutable 
-```
-sudo chmod +x /usr/local/bin/crc
-```
-
-Comprobamos que sea ejecutable.
-```
-ls -l /usr/local/bin/crc
-```
+Se descargará el instalador `crc-windows-installer.zip` en la carpeta `Descargas`
 
 
 Ahora debemos descargar el `Pull secret`. Básicamente es la información de autenticación que necesitaremos para conectar con el cluster. Hacemos clic en el botón correspondiente.
 
-![Pull secret](../img/202405301908.png)
+![Pull secret](../img/202405310937.png)
 
-Comprobamos que se ha descargado el secreto.
-```
-cd ~
-```
+En la carpeta `Descargas` tenemos el `pull secret` y el instalador, que está comprimido.
 
-```
-ls -l ~/Downloads/pull-secret 
-```
+![Carpeta descarga](../img/202405310939.png)
 
-![ls secret](../img/202405301913.png)
+Descomprimimos el instalador.
 
-Si tienes curiosidad, puedes ver su contenido.
-```
-cat  ~/Downloads/pull-secret 
-```
+Si tienes curiosidad, puedes ver el contenido del `pull secret`.
+
 
 Obtendrás algo como esto.
 
-![secret](../img/202405301918.png)
+![secret](../img/202405310942.png)
 
-Vamos a mover el secreto al directorio `home` para no perderlo.
-```
-mv ~/Downloads/pull-secret ~
-```
+
+Vamos a mover el secreto al un directorio mejor para que no se pierda. Elige el directorio que más te guste.
+
+Una vez descomprimido el instalador, verás el correspondiente archivo `msi`.
+
+![msi](../img/202405310945.png)
+
+
+Ejecútalo y sigue los pasos del asistente.
+
+![Asistente instalación](../img/202405310947.png)
+
+Al finalizar la instalación debemos reiniciar el equipo.
+
+
+
+
 
 
 
@@ -160,12 +117,12 @@ Nota: Tardará aproximadamente 10-15 minutos.
 crc setup
 ```
 
+Es el momento de iniciar el cluster, para ello usamos el siguiente comando.
+Nota: Tarda unos 10 minutos. 23:58
+```
+crc start -p pull-secret
+```
 
 
-
-
-
-
- 
 
 https://www.youtube.com/watch?v=skOohvvPBys

@@ -8,6 +8,5 @@ El repositorio GIT está organizado en una serie de carpetas. Las presentaciones
 ## Carpeta 85 (CodeReady Containers)
 
 1. Laboratorio 85-A: ***Instalación de CodeReady Containers en equipo de usuario***. Los ejercicios a realizar son:
-   - Habilitación de la ***virtualización anidada*** en la VM CentOS 8.
    - Instalación de ***OpenShift local*** 
    
