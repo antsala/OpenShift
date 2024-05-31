@@ -67,7 +67,7 @@ Hacemos clic en el botón `Download OpenShift Local`, indicado en la siguiente i
 Se descargará el instalador `crc-windows-installer.zip` en la carpeta `Descargas`
 
 
-Ahora debemos descargar el `Pull secret`. Básicamente es la información de autenticación que necesitaremos para conectar con el cluster. Hacemos clic en el botón correspondiente.
+Ahora debemos descargar el `pull secret`. Básicamente es la información de autenticación que necesitaremos para conectar con el cluster. Hacemos clic en el botón correspondiente.
 
 ![Pull secret](../img/202405310937.png)
 
