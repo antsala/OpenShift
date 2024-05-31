@@ -113,7 +113,7 @@ Nota: Tardará aproximadamente 10 minutos.
 ```
 crc setup
 ```
-El asistente realizará unas comprobaciones previas, descargará y descomprimirá la VM de OpenShift Containers.
+El asistente realizará unas comprobaciones previas, descargará y descomprimirá la VM de `CodeReady Containers` (OpenShift Local).
 
 ![crc setup](../img/202405311011.png)
 
