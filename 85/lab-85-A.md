@@ -135,6 +135,110 @@ Cuando el cluster sea estable, se mostrará la información de conexión, tal y 
 
 ![Conexión](../img/2024053110232.png)
 
+Probamos la consola web. Con un navegador, conecta a la URL siguiente.
+Nota: Se trata de un certificado autofirmado, así que acepta la conexión no segura
+
+```
+https://console-openshift-console.apps-crc.testing
+```
+
+Lógate usando las credenciales de administrador, con el usuario `kubeadmin` y el password suministrado.
+
+Si todo ha ido bien, aparecerá la consola de OpenShift.
+
+![Consola](../img/2024053110237.png)
+
+En OpenShift, como en otras implementaciones de Kubernetes, se utiliza bastante la línea de comandos. En este caso disponemos del comando `oc`, que significa `OpenShift Cli`. Para poder utilizarlo, es necesario ejecutar los comandos que aparecen en la consola.
+
+`crc oc-env`: Es un comando proporcionado por CodeReady Containers (CRC). Al ejecutarlo, este comando imprime una serie de instrucciones en la consola, generalmente comandos de configuración del entorno necesarios para que la herramienta oc (CLI de OpenShift) funcione correctamente en tu terminal.
+
+```
+@FOR /f "tokens=*" %i IN ('crc oc-env') DO @call %i
+```
+
+Ahora es necesario conectar con el cluster desde la cli, para ello podemos usar la identidad del administrador `kubeadmin` o la del desarrollador `developer`. Para autenticarnos como administrador, ejecutamos el siguiente comando.
+
+```
+oc login -u kubeadmin https://api.crc.testing:6443
+```
+
+Para ver los comandos disponibles a través de la CLI, ejecutamos.
+
+```
+oc --help
+```
+
+El resultado es el siguiente.
+
+![oc --help](../img/2024053110246.png)
+
+Vamos a ver algunos comandos simplemente para verificar el correcto funcionamiento del cluster. A lo largo del curso iremos aprendiendo más.
+
+Para saber la identidad del usuario logado al cluster, ejecutamos.
+
+```
+oc whoami
+```
+
+Para logarnos como desarrollador, escribimos.
+
+```
+oc login -u developer https://api.crc.testing:6443
+```
+
+Para volver a logarnos como administrador, escribimos.
+
+```
+oc login -u kubeadmin https://api.crc.testing:6443
+```
+
+Para ver los recursos de Kubernetes que se están usando, ejecutamos.
+
+```
+oc get all
+```
+
+Para ver los `namespaces`. Escribimos.
+
+```
+oc get namespaces
+```
+
+## Ejercicio 2: Detener el cluster y eliminar recursos.
+
+Para detener el cluster, ejecutamos el siguiente comando.
+
+```
+crc stop
+```
+
+Se pararán todos los servicios.
+
+![crc stop](../img/2024053110257.png)
+
+La VM de Hyper-V se detiene y se recuperan los recursos que estaba usando.
+
+![Hyper-V](../img/2024053110258.png)
+
+Para eliminar completamente todos los recursos que usa el cluster, ejecutamos.
+
+```
+crc delete
+```
+
+Se elimina la VM de Hyper-V y si queremos volver a iniciarlo debemos empezar desde el principio con...
+
+```
+crc start -p "C:\Users\Antonio\OneDrive - AVANTE FORMACION\Cursos\Containers\Openshift\pull-secret.txt"
+```
+
+Para proceder a realizar una desinstalación completa, después de ejecutar `crc delete`, debemos realizar los siguiente pasos.
+
+Desinstalar `OpenShift Local` desde agregar y quitar programas.
+
+![Agregar o quitar programas](../img/202405311127.png)
+
+comprobar que se borran los archivos descargados. y hacer una desinstalación completa. Ver ".crc" en home.
 
 
 
