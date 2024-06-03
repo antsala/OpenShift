@@ -39,6 +39,8 @@ La perspectiva del desarrollador proporciona flujos de trabajo específicos para
 
 ## Ejercicio 2: Creación de un proyecto.
 
+Nota: Esta paso solo se puede hacer el el cluster real o en la implementación local de OpenShift. Si estamos trabajando con en sandbox, Red Hat ya ha creado el proyecto por nosotros y no nos dejará crear proyectos nuevos.
+
 Los `proyectos` son extensiones de OpenShift Container Platform a los `espacios de nombres` de Kubernetes. 
 
 Los usuarios ***deben recibir acceso a los proyectos*** por parte de los administradores. Los administradores de clústeres pueden permitir que los desarrolladores creen sus propios proyectos. En la mayoría de los casos, los usuarios tienen acceso automáticamente a sus propios proyectos.
