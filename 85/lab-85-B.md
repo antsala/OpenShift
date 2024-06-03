@@ -235,8 +235,36 @@ Seleccionamos `Builder Image` y luego `Python`.
 
 ![Builder Image](../img/202406031120.png)
 
+La elección entre importar una aplicación utilizando un `Dockerfile` o una `Builder Image` en OpenShift depende de las necesidades específicas del desarrollo y despliegue. Ambas tienen sus propias ventajas y casos de uso particulares.
 
+### Dockerfile
 
+**Ventajas**:
+- **Flexibilidad**: Un Dockerfile ofrece un control total sobre el proceso de construcción de la imagen. Puedes definir cada paso de la construcción, desde la base de la imagen hasta la instalación de dependencias y la configuración final.
+- **Transparencia**: Al usar un Dockerfile, todas las instrucciones para construir la imagen están explícitas en el archivo, lo que facilita la auditoría y la replicación del proceso.
+- **Portabilidad**: Las imágenes Docker construidas con Dockerfiles son portables a cualquier entorno que soporte Docker, no solo OpenShift.
+- **Personalización**: Puedes optimizar la imagen para tus necesidades específicas, incluyendo la selección de la base de la imagen y las herramientas incluidas.
+
+**Desventajas**:
+- **Complejidad**: Requiere más conocimiento sobre Docker y la construcción de imágenes, lo que puede ser una barrera para principiantes.
+- **Mantenimiento**: Necesitas mantener y actualizar manualmente el Dockerfile conforme cambian los requisitos de tu aplicación o las versiones de las dependencias.
+
+### Builder Image
+
+**Ventajas**:
+- **Facilidad de uso**: Builder Images están preconfiguradas para construir y desplegar aplicaciones de manera rápida y eficiente, lo que reduce la necesidad de conocimientos avanzados sobre la construcción de imágenes Docker.
+- **Estándar**: Red Hat y la comunidad proporcionan imágenes de builder estandarizadas y optimizadas para diferentes lenguajes y frameworks, asegurando buenas prácticas y configuraciones seguras.
+- **Integración**: En OpenShift, Builder Images se integran estrechamente con Source-to-Image (S2I), facilitando la construcción automática de imágenes a partir del código fuente.
+
+**Desventajas**:
+- **Menos Flexibilidad**: Menor control sobre el proceso de construcción en comparación con un Dockerfile. Las personalizaciones están limitadas a lo que permite la imagen de builder.
+- **Dependencia**: Dependencia de las actualizaciones y mantenimiento de la imagen de builder por parte de terceros (como Red Hat o la comunidad), lo que puede ser una limitación si necesitas ajustes específicos.
+
+### Comparación
+- **Control vs. Conveniencia**: El Dockerfile ofrece mayor control y flexibilidad a costa de ser más complejo, mientras que las Builder Images proporcionan una solución más sencilla y rápida a cambio de una menor capacidad de personalización.
+- **Caso de uso**: Utiliza un Dockerfile cuando necesitas control detallado sobre el entorno de construcción o cuando trabajas con un entorno que no se ajusta a una Builder Image preexistente. Opta por Builder Images cuando buscas una solución rápida y estandarizada para construir y desplegar tu aplicación con menos esfuerzo inicial.
+
+En resumen, la elección entre un Dockerfile y una Builder Image depende del nivel de control que necesitas y de la facilidad de uso que prefieras para tu proyecto.
 
 
 Revisamos el resto de opciones. Editamos las `Labels` y añadimos las siguientes:
