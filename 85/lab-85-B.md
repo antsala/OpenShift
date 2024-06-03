@@ -181,6 +181,21 @@ El circulo celeste cambiará a un color más oscuro cuando nuestro despliegue es
 
 ![UI2](../img/202406031033.png)
 
-La interfaz gráfica muestra la página de `Topología`, donde podemos ver como el desployment `parksmap` se encuentra en la aplicación `national-parks-app`.
+La interfaz gráfica muestra la página de `Topología`, donde podemos ver como el deployment `parksmap` se encuentra en la aplicación `parksmap-app`.
+
+## Ejercicio 5: Examinar el pod.
+
+OpenShift Container Platform aprovecha el concepto pod de Kubernetes, que como bien sabemos está formado por uno o más contenedores. El pod es la unidad más pequeña de planificación.
+
+El panel Información general le permite acceder a muchas características de la implementación. Las pestañas Detalles y Recursos le permiten escalar los pods de la aplicación, comprobar el estado de la compilación, los servicios y las rutas. Este panel es accesible desde el icono en forma de triángulo que se puede observar en la imagen.
+
+![Triángulo](../img/202406031043.png)
+
+Al hacer clic en el triángulo, aparecerá el panel de información general.
+
+![Panel de info](../img/202406031044.png)
+
+
+
 
 
