@@ -9,4 +9,6 @@ El repositorio GIT está organizado en una serie de carpetas. Las presentaciones
 
 1. Laboratorio 85-A: ***Instalación de CodeReady Containers en equipo de usuario***. Los ejercicios a realizar son:
    - Instalación de ***OpenShift local*** 
+
+2. Laboratorio 85-B: ***Desplegar la aplicación de parques naturales en crc***
    
