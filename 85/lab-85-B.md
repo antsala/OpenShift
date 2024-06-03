@@ -163,9 +163,11 @@ En OpenShift, el uso de las `etiquetas` (labels) es fundamental. Para ver las et
 Añadimos las siguientes etiquetas:
 ```
 app=national-parks-app
-
+```
+```
 component=parksmap
-
+```
+```
 role=frontend
 ```
 
