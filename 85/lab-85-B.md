@@ -368,8 +368,73 @@ Valor
 mongodb
 ```
 
+Hacemos clic en el botón `Create`.
+
+En la imagen podemos ver los tres componentes de la aplicación. De izquierda a derecha son:
+
+- `parksmap`: Frontend de la aplicación.
+
+- `mongodb-nationalparks`: Base de datos de la app.
+
+- `nationalparks-py-git`: Servicio web desde el que se cargarán las tablas de la base de datos.
+
+![tres componentes](../img/202406031220.png)
 
 
+## Ejercicio 9: Creación del secreto.
 
+Desde la `Perspectiva de desarrollador`, elegimos `Secrets` en el panel izquierdo y hacemos clic en el botón `Create` y elegimos `Key/value secret'.
 
+![Crear secreto](../img/202406031234.png)
 
+Añadimos las siguientes parejas clave/valor.
+
+Nombre clave 1
+```
+MONGODB_USER
+```
+
+Valor
+```
+mongodb
+```
+
+Nombre clave 2
+```
+DATABASE_SERVICE_NAME
+```
+
+Valor
+```
+mongodb-nationalparks
+```
+
+Nombre clave 3
+```
+DMONGODB_PASSWORD
+```
+
+Valor
+```
+mongodb
+```
+
+Nombre clave 4
+```
+MONGODB_DATABASE
+```
+
+Valor
+```
+mongodb
+```
+
+Nombre clave 5
+```
+MONGODB_ADMIN_PASSWORD
+```
+
+Valor
+```
+mongodb
+```
