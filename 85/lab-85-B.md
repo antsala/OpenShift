@@ -225,7 +225,19 @@ Escribimos la siguiente URL:
 https://github.com/openshift-roadshow/nationalparks-py.git
 ```
 
-Después de la validación, OpenShift detecta las diferentes formas o estrategias de importar la aplicación. Aceptamos la estrategia recomendada, que es `Dockerfile`.
+Después de la validación, OpenShift detecta las diferentes formas o estrategias de importar la aplicación. 
+
+IMPORTANTE: Si la estrategia recomendada es `Dockerfile`, debemos cambiarla. Para ello hacemos clic en el enlace `Edit Import Strategy`.
+
+![Edit import strategy](../img/202406031118.png)
+
+Seleccionamos `Builder Image` y luego `Python`.
+
+![Builder Image](../img/202406031120.png)
+
+
+
+
 
 Revisamos el resto de opciones. Editamos las `Labels` y añadimos las siguientes:
 ```
@@ -241,7 +253,9 @@ role=backend
 type=parksmap-backend
 ```
 
-Hacemos clic en el botón `Create`.
+Hacemos clic en el botón `Create`. La vista de `Topología` muestra los componentes que hemos desplegado.
+
+
 
 
 
