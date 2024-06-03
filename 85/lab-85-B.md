@@ -329,6 +329,7 @@ mongodb-nationalparks
 Desplegamos la sección `Show advanced Deployment options` y creamos las siguients variables de entorno.
 
 Nombre 	                Valor
+-------------------------------
 MONGODB_USER            mongodb
 
 MONGODB_PASSWORD        mongodb
