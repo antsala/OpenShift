@@ -18,4 +18,5 @@ El repositorio GIT está organizado en una serie de carpetas. Las presentaciones
    - Examinar el pod.
    - Escalar la aplicación.
    - Despliegue del servicio de backend.
+   - Conectar con la base de datos.
    

@@ -240,14 +240,14 @@ La elección entre importar una aplicación utilizando un `Dockerfile` o una `Bu
 ### Dockerfile
 
 **Ventajas**:
-- **Flexibilidad**: Un Dockerfile ofrece un control total sobre el proceso de construcción de la imagen. Puedes definir cada paso de la construcción, desde la base de la imagen hasta la instalación de dependencias y la configuración final.
-- **Transparencia**: Al usar un Dockerfile, todas las instrucciones para construir la imagen están explícitas en el archivo, lo que facilita la auditoría y la replicación del proceso.
+- **Flexibilidad**: Un Dockerfile ofrece un control total sobre el proceso de construcción de la imagen. Podemos definir cada paso de la compilación, desde la imagen base hasta la instalación de dependencias y la configuración final.
+- **Transparencia**: Al usar un Dockerfile, todas las instrucciones para compilar la imagen están explícitas en el archivo, lo que facilita la auditoría y la replicación del proceso.
 - **Portabilidad**: Las imágenes Docker construidas con Dockerfiles son portables a cualquier entorno que soporte Docker, no solo OpenShift.
-- **Personalización**: Puedes optimizar la imagen para tus necesidades específicas, incluyendo la selección de la base de la imagen y las herramientas incluidas.
+- **Personalización**: Podemos optimizar la imagen para nuestras necesidades específicas, incluyendo la selección de la imagen base y las herramientas incluidas.
 
 **Desventajas**:
-- **Complejidad**: Requiere más conocimiento sobre Docker y la construcción de imágenes, lo que puede ser una barrera para principiantes.
-- **Mantenimiento**: Necesitas mantener y actualizar manualmente el Dockerfile conforme cambian los requisitos de tu aplicación o las versiones de las dependencias.
+- **Complejidad**: Requiere más conocimiento sobre Docker y la compilación de imágenes, lo que puede ser una barrera para principiantes.
+- **Mantenimiento**: Necesitamos mantener y actualizar manualmente el Dockerfile conforme cambian los requisitos de la aplicación o las versiones de las dependencias.
 
 ### Builder Image
 
@@ -257,14 +257,12 @@ La elección entre importar una aplicación utilizando un `Dockerfile` o una `Bu
 - **Integración**: En OpenShift, Builder Images se integran estrechamente con Source-to-Image (S2I), facilitando la construcción automática de imágenes a partir del código fuente.
 
 **Desventajas**:
-- **Menos Flexibilidad**: Menor control sobre el proceso de construcción en comparación con un Dockerfile. Las personalizaciones están limitadas a lo que permite la imagen de builder.
-- **Dependencia**: Dependencia de las actualizaciones y mantenimiento de la imagen de builder por parte de terceros (como Red Hat o la comunidad), lo que puede ser una limitación si necesitas ajustes específicos.
+- **Menos Flexibilidad**: Menor control sobre el proceso de compilación en comparación con un Dockerfile. Las personalizaciones están limitadas a lo que permite la imagen de builder.
+- **Dependencia**: Dependencia de las actualizaciones y mantenimiento de la imagen de builder por parte de terceros (como Red Hat o la comunidad), lo que puede ser una limitación si necesitamos ajustes específicos.
 
 ### Comparación
-- **Control vs. Conveniencia**: El Dockerfile ofrece mayor control y flexibilidad a costa de ser más complejo, mientras que las Builder Images proporcionan una solución más sencilla y rápida a cambio de una menor capacidad de personalización.
-- **Caso de uso**: Utiliza un Dockerfile cuando necesitas control detallado sobre el entorno de construcción o cuando trabajas con un entorno que no se ajusta a una Builder Image preexistente. Opta por Builder Images cuando buscas una solución rápida y estandarizada para construir y desplegar tu aplicación con menos esfuerzo inicial.
-
-En resumen, la elección entre un Dockerfile y una Builder Image depende del nivel de control que necesitas y de la facilidad de uso que prefieras para tu proyecto.
+- **Control vs. Conveniencia**: El `Dockerfile` ofrece mayor control y flexibilidad a costa de ser más complejo, mientras que las `Builder Images` proporcionan una solución más sencilla y rápida a cambio de una menor capacidad de personalización.
+- **Caso de uso**: Utilizamos un Dockerfile cuando necesitamos control detallado sobre el entorno de compilación o cuando trabajamos con un entorno que no se ajusta a una Builder Image preexistente. Optamos por Builder Images cuando buscas una solución rápida y estandarizada para construir y desplegar la aplicación con menos esfuerzo inicial.
 
 
 Revisamos el resto de opciones. Editamos las `Labels` y añadimos las siguientes:
@@ -283,7 +281,61 @@ type=parksmap-backend
 
 Hacemos clic en el botón `Create`. La vista de `Topología` muestra los componentes que hemos desplegado.
 
+La página de `Topología` muestra las dos capas de la aplicación.
 
+![2 capas](../img/202406031129.png)
+
+Si hacemos clic en las `Routes` del front-end, podemos obtener la URL de conexión. 
+
+![URL front](../img/202406031135.png)
+
+Al conectar con el navegador, observaremos que no hay conexión con los datos.
+
+![Navegador](../img/202406031136.png)
+
+Es lógico, pues el backend que hemos desplegado no es la verdadera base de datos. Accedemos a su ruta.
+
+![URL back](../img/202406031138.png)
+
+Se muestra un mensaje de bienvenida.
+
+![servicio web](../img/202406031139.png)
+
+En realidad, es un servicio web, desde el cual, la verdadera base de datos MongoDB, cargará los datos.
+
+Procedemos a desplegar MongoDB.
+
+## Ejercicio 8: Conectar con la base de datos.
+
+Desde la `Perspectiva de desarrollador` hacemos clic en `+Add` y posteriormente en `Container images`.
+
+Rellenamos el formulario con la siguiente información:
+
+En `Image Name`:
+```
+centos/mongodb-36-centos7
+```
+
+En `Runtime icon`, buscamos el de Mongo, para ello escribimos en el cuadro de búsqueda:
+```
+mongodb
+```
+
+En `Name` escribimos:
+```
+mongodb-nationalparks
+```
+
+Desplegamos la sección `Show advanced Deployment options` y creamos las siguients variables de entorno.
+
+Nombre 	                Valor
+MONGODB_USER            mongodb
+
+MONGODB_PASSWORD        mongodb
+
+MONGODB_DATABASE        mongodb
+
+MONGODB_ADMIN_PASSWORD  mongodb
 
 
 
