@@ -42,4 +42,73 @@ En la consola web de OpenShift Container Platform, elegimos la `perspectiva del 
 
 ![Perspectiva desarrollador](../img/202406030934.png)
 
-Tiene las funciones y los permisos adecuados en un proyecto para crear aplicaciones y otras cargas de trabajo en OpenShift Container Platform.
+Hacemos clic en 'Create Project'. Aparecerá el formulario de creación de proyecto. En él aportamos la siguiente información.
+
+En ***Name*** escribimos:
+```
+user-getting-started
+```
+
+En ***Display name***:
+```
+Getting Started with OpenShift
+```
+
+***Description*** lo dejamos vacío y hacemos clic en el botón `Create`.
+
+Con esto finaliza la creación del proyecto de OpenShift.
+
+## Ejercicio 3: Revisión de los permisos.
+
+OpenShift Container Platform crea automáticamente algunas `cuentas de servicio` especiales en cada proyecto.
+
+Una `cuenta de servicio` en OpenShift es una identidad especial que se utiliza para ejecutar `pods` dentro de un proyecto (o namespace) y para otorgar permisos específicos a aplicaciones y servicios que se ejecutan en esos pods. A diferencia de las cuentas de usuario normales, las cuentas de servicio no están vinculadas a personas individuales sino a aplicaciones o componentes de la infraestructura, permitiendo un control granular sobre los permisos y roles necesarios para que estas aplicaciones accedan a recursos específicos dentro del cluster de OpenShift. Esto facilita la gestión segura y eficiente de los recursos y operaciones automatizadas en el entorno de contenedores.
+
+La cuenta de servicio `predeterminada` asume la responsabilidad de ejecutar los pods. OpenShift Container Platform usa e inserta esta cuenta de servicio en cada pod que inicia.
+
+La práctica que vamos a hacer crea un objeto `RoleBinding` para el objeto de cuenta de servicio predeterminado. La cuenta de servicio se comunica con la API de OpenShift Container Platform para obtener información sobre los pods, los servicios y los recursos del proyecto.
+
+Cambiamos a la `perspectiva de administrador`.
+
+Elegimos la opción `RoleBindings`
+
+![Perspectiva desarrollador](../img/202406030945.png)
+
+En la imagen puedes ver que ya existen una cantidad importante de RoleBindings en el cluster. Hacemos clic en `Create binding`.
+
+![Create Binding](../img/202406030949.png)
+
+Rellenamos el formulario con la siguiente formación.
+
+En ***Name***:
+```
+sa-user-account
+```
+
+En ***Namespace*** buscamos nuestro proyecto, que se llama:
+```
+user-getting-started
+```
+
+En ***Role name*** buscamos `view` y seleccionamos ese rol.
+```
+view
+```
+
+En ***Subject*** seleccionamos `ServiceAccount`.
+
+En ***Subject namespace*** buscamos y seleccionamos:
+```
+user-getting-started
+```
+
+En ***Subject name*** escribimos:
+```
+default
+```
+
+Por último hacemos clic en `Create`.
+
+
+
+
