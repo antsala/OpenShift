@@ -171,12 +171,16 @@ component=parksmap
 role=frontend
 ```
 
-
 Finalizamos la práctica haciendo clic en el botón `Create`.
 
-La interfaz gráfica permitirá seguir configurando nuestra aplicación.
+La interfaz gráfica muestra el estado de implementación.
 
 ![UI](../img/202406031024.png)
+
+El circulo celeste cambiará a un color más oscuro cuando nuestro despliegue esté implementado.
+
+![UI2](../img/202406031033.png)
+
 
 
 
