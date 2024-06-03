@@ -85,6 +85,8 @@ En ***Name***:
 sa-user-account
 ```
 
+La denominación `sa` en `sa-user-account `proviene de la abreviatura de ***Service Account***.
+
 En ***Namespace*** buscamos nuestro proyecto, que se llama:
 ```
 user-getting-started
@@ -108,6 +110,17 @@ default
 ```
 
 Por último hacemos clic en `Create`.
+
+El resultado debe ser el siguiente:
+
+![resultado](../img/202406031003.png)
+
+la vista `YAML` permite visualizar la definición del objeto creado en el cluster.
+
+![resultado](../img/202406031005.png)
+
+
+
 
 
 
