@@ -181,6 +181,6 @@ El circulo celeste cambiará a un color más oscuro cuando nuestro despliegue es
 
 ![UI2](../img/202406031033.png)
 
-
+La interfaz gráfica muestra la página de `Topología`, donde podemos ver como el desployment `parksmap` se encuentra en la aplicación `national-parks-app`.
 
 
