@@ -181,7 +181,7 @@ El circulo celeste cambiará a un color más oscuro cuando nuestro despliegue es
 
 ![UI2](../img/202406031033.png)
 
-La interfaz gráfica muestra la página de `Topología`, donde podemos ver como el deployment `parksmap` se encuentra en la aplicación `parksmap-app`.
+La interfaz gráfica muestra la página de `Topology`, donde podemos ver como el deployment `parksmap` se encuentra en la aplicación `parksmap-app`.
 
 ## Ejercicio 5: Examinar el pod.
 
@@ -279,9 +279,9 @@ role=backend
 type=parksmap-backend
 ```
 
-Hacemos clic en el botón `Create`. La vista de `Topología` muestra los componentes que hemos desplegado.
+Hacemos clic en el botón `Create`. La vista de `Topology` muestra los componentes que hemos desplegado.
 
-La página de `Topología` muestra las dos capas de la aplicación.
+La página de `Topology` muestra las dos capas de la aplicación.
 
 ![2 capas](../img/202406031129.png)
 
@@ -443,3 +443,21 @@ Valor
 ```
 mongodb
 ```
+
+Hacemos clic en `Create`. 
+
+Ahora hacemos clic en `Add Secret to workload`, con la idea de asignar el secreto al deployment. Seleccionamos `parksmap`. Hacemos clic en `Save`. OpenShift redesplegará el desployment para que lea los secretos a través de variables de entorno.
+
+## Ejercicio 10: Cargar las tablas de la base de datos desde el servicio web.
+
+La base de datos está creada, pero sus tablas vacías. Vamos a proceder a cargarlas.
+
+Desde la vista `Topology`, navegamos hacia el deployment `mongodb-nationalparks` y hacemos clic en `Resources` para obtener la ruta. La copiamos en el portapapeles.
+
+![Ruta](../img/202406031303.png)
+
+A continuación, pegamos el contenido del portapapeles en la barra de dirección del navegador, y al final, concatenamos lo siguiente:
+```
+/ws/data/load
+```
+
