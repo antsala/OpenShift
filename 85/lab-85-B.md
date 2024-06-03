@@ -467,7 +467,7 @@ Como resultado, el servicio insertará datos en la base de datos.
 
 Ya solo queda tomar la URL del frontend (en routes) y conectar.
 
-![Parques nacionales](../img/202406031320.png)
+![Parques nacionales](../img/202406031329.png)
 
 ## Ejercicio 11: Eliminación de la aplicación.
 
