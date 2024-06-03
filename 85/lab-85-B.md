@@ -129,7 +129,50 @@ Como lo que deseamos hacer es elegir una imagen de contenedor, seleccionamos `Co
 
 ![Container images](../img/202406031011.png)
 
+Rellenamos el formulario con la siguiente información.
 
+En ***Image Name***, escribimos la ruta de la siguiente imagen:
+```
+quay.io/openshiftroadshow/parksmap:latest
+```
+
+Se realizará una verificación. 
+
+En el desplegable `Runtime icon` podemos elegir el icono de nuestra elección.
+
+Comprobar que en la sección `General` aparece la siguiente información:
+
+Nota: Es posible cambiar estos valores a los que necesitemos.
+
+![General](../img/202406031016.png)
+
+En la sección `Deploy` debemos comprobar que la imagen seleccionada se desplegará en un objeto `Deployment`de Kubernetes.
+
+![Deployment](../img/202406031019.png)
+
+Nota: En OpenShift, la principal diferencia entre `Deployment` y `DeploymentConfig` radica en cómo gestionan las actualizaciones y despliegues de las aplicaciones. `Deployment` es un objeto nativo de Kubernetes que utiliza controladores y replicasets para gestionar el ciclo de vida de las aplicaciones, proporcionando características avanzadas como despliegues automáticos, rollbacks, y actualizaciones continuas. Por otro lado, `DeploymentConfig` es específico de OpenShift y ofrece funcionalidades adicionales como hooks de despliegue personalizados y una integración más estrecha con otras características de OpenShift, como las estrategias de despliegue personalizadas y las builds automáticas. Aunque `DeploymentConfig` proporciona más opciones de personalización, `Deployment` es más estándar y portable a cualquier clúster de Kubernetes.
+
+Para que nuestra aplicación sea accesible, debemos crear una `Ruta`. 
+
+![Route](../img/202406031022.png)
+
+En OpenShift, el uso de las `etiquetas` (labels) es fundamental. Para ver las etiquetas asociadas a este despliegue, hacemos clic en el enlace `Labels`, tal y como podemos apreciar en la siguiente imagen.
+
+![Labels](../img/202406031026.png)
+
+Añadimos las siguientes etiquetas:
+```
+app=national-parks-app
+component=parksmap
+role=frontend
+```
+
+
+Finalizamos la práctica haciendo clic en el botón `Create`.
+
+La interfaz gráfica permitirá seguir configurando nuestra aplicación.
+
+![UI](../img/202406031024.png)
 
 
 
