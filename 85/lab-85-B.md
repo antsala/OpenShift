@@ -475,6 +475,8 @@ Para eliminar los componentes, hacemos clic en los elementos de la interfaz grá
 
 ![Delete app](../img/202406031331.png)
 
+Nota: Los secretos no se eliminan al destruir la aplicación.
+
 
 
 
