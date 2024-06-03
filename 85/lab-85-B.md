@@ -387,6 +387,11 @@ Desde la `Perspectiva de desarrollador`, elegimos `Secrets` en el panel izquierd
 
 ![Crear secreto](../img/202406031234.png)
 
+En `Secret name` escribimos:
+```
+nationalparks-mongodb-parameters
+```
+
 Añadimos las siguientes parejas clave/valor.
 
 Nombre clave 1
