@@ -17,9 +17,16 @@ Una instancia en ejecución de local.
 
 ## Ejercicio 1: Conectar a la consola web.
 
-Iniciamos sesión en la consola web de OpenShift Container Platform con nuestras credenciales de inicio de sesión. Conectamos a la siguiente URL, e iniciamos sesión con las credenciales de administrador.
+Iniciamos sesión en la consola web de OpenShift Container Platform con nuestras credenciales de inicio de sesión. 
+
+Si estás usando la implementación local, conectamos a la siguiente URL, e iniciamos sesión con las credenciales de administrador.
 ```
 https://console-openshift-console.apps-crc.testing
+```
+
+Por el contrario, si usamos el sandbox, deberás conectar con la URL proporcionada por Red Hat, que es:
+```
+https://console.redhat.com/openshift/sandbox
 ```
 
 Nos redirigirá a la página Proyectos. Para los usuarios no administradores, la vista predeterminada es la `perspectiva del desarrollador`. Para los administradores de clústeres, la vista predeterminada es la `perspectiva Administrador`. Si no tenemos privilegios en el cluster, no veremos la perspectiva de administrador en la consola web.
