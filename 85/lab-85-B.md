@@ -195,6 +195,35 @@ Al hacer clic en el triángulo, aparecerá el panel de información general.
 
 ![Panel de info](../img/202406031044.png)
 
+## Ejercicio 6: Escalar la aplicación.
+
+En Kubernetes, un objeto `Deployment` define cómo se implementa una aplicación. En la mayoría de los casos, los usuarios usan `Pod`, `Service`, `ReplicaSets` y `Deployment`. OpenShift Container Platform es capaz de crear estos recursos por nosotros.
+
+Al implementar la imagen `national-parks-app`, se crea un recurso de implementación. En este ejemplo, solo se implementa un solo `Pod`.
+
+Vamos a escalar el deployment para que use dos pods.
+
+Hacemos clic en la pestaña `Details` y a continuación utilizamos los controles para instanciar dos pods.
+
+![2 instancias](../img/202406031053.png)
+
+Volvamos a dejar una sola instancia en el despliegue.
+
+## Ejercicio 7: Despliegue del servicio de backend.
+
+A continuación vamos a proceder a desplegar un servicio back-end para la aplicación de parques naturales. El frontend de la aplicación realiza consultas a una base de datos MongoDB para localizar y devolver las coordenadas del mapa de todos los parques nacionales del mundo.
+
+El servicio back-end implementado que es `nationalparks`.
+
+Desde la perspectiva desarrollador, seleccionamos `+Add` y elegimos `Import from Git`. 
+
+![Import from Git](../img/202406031058.png)
+
+Escribimos la siguiente URL:
+```
+https://github.com/openshift-roadshow/nationalparks-py.git
+```
+
 
 
 
