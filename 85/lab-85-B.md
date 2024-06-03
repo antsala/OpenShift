@@ -452,7 +452,7 @@ Ahora hacemos clic en `Add Secret to workload`, con la idea de asignar el secret
 
 La base de datos está creada, pero sus tablas vacías. Vamos a proceder a cargarlas.
 
-Desde la vista `Topology`, navegamos hacia el deployment `mongodb-nationalparks` y hacemos clic en `Resources` para obtener la ruta. La copiamos en el portapapeles.
+Desde la vista `Topology`, navegamos hacia el deployment `nationalparks-py-git` y hacemos clic en `Resources` para obtener la ruta. La copiamos en el portapapeles.
 
 ![Ruta](../img/202406031303.png)
 
@@ -460,4 +460,10 @@ A continuación, pegamos el contenido del portapapeles en la barra de dirección
 ```
 /ws/data/load
 ```
+
+Como resultado, el servicio insertará datos en la base de datos.
+
+![Inserted](../img/202406031320.png)
+
+
 
