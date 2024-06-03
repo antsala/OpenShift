@@ -465,5 +465,18 @@ Como resultado, el servicio insertará datos en la base de datos.
 
 ![Inserted](../img/202406031320.png)
 
+Ya solo queda tomar la URL del frontend (en routes) y conectar.
+
+![Parques nacionales](../img/202406031320.png)
+
+## Ejercicio 11: Eliminación de la aplicación.
+
+Para eliminar los componentes, hacemos clic en los elementos de la interfaz gráfica y, mediante su menú contextual, los eliminamos. Como alternartiva, podemos eliminar la aplicación directamente.
+
+![Delete app](../img/202406031331.png)
+
+
+
+
 
 
