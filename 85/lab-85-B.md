@@ -34,7 +34,7 @@ Nos redirigirá a la página Proyectos. Para los usuarios no administradores, la
 ![Perspectiva administrador](../img/202406030924.png)
 
 
-La consola web proporciona dos perspectivas: la perspectiva del administrador y la perspectiva del desarrollador. La perspectiva del desarrollador proporciona flujos de trabajo específicos para los casos de uso del desarrollador. La perpectiva de administrador permite desplegar aplicaciones y administrar el cluster.
+La perspectiva del desarrollador proporciona flujos de trabajo específicos para los casos de uso del desarrollador. La perpectiva de administrador permite gestionar el ciclo de vida de las aplicaciones y administrar el cluster.
 
 
 ## Ejercicio 2: Creación de un proyecto.
