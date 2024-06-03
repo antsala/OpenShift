@@ -328,7 +328,7 @@ mongodb-nationalparks
 
 Desplegamos la sección `Show advanced Deployment options` y creamos las siguientes parejas clave/valor como variables de entorno.
 
-Nombre
+Nombre variable 1
 ```
 MONGODB_USER
 ```
@@ -338,7 +338,7 @@ Valor
 mongodb
 ```
 
-Nombre
+Nombre variable 2
 ```
 MONGODB_PASSWORD
 ```
@@ -348,7 +348,7 @@ Valor
 mongodb
 ```
 
-Nombre
+Nombre variable 3
 ```
 MONGODB_DATABASE
 ```
@@ -358,7 +358,7 @@ Valor
 mongodb
 ```
 
-Nombre
+Nombre variable 4
 ```
 MONGODB_ADMIN_PASSWORD
 ```
