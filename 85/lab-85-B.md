@@ -326,17 +326,49 @@ En `Name` escribimos:
 mongodb-nationalparks
 ```
 
-Desplegamos la sección `Show advanced Deployment options` y creamos las siguients variables de entorno.
+Desplegamos la sección `Show advanced Deployment options` y creamos las siguientes parejas clave/valor como variables de entorno.
 
-Nombre 	                Valor
--------------------------------
-MONGODB_USER            mongodb
+Nombre
+```
+MONGODB_USER
+```
 
-MONGODB_PASSWORD        mongodb
+Valor
+```
+mongodb
+```
 
-MONGODB_DATABASE        mongodb
+Nombre
+```
+MONGODB_PASSWORD
+```
 
-MONGODB_ADMIN_PASSWORD  mongodb
+Valor
+```
+mongodb
+```
+
+Nombre
+```
+MONGODB_DATABASE
+```
+
+Valor
+```
+mongodb
+```
+
+Nombre
+```
+ONGODB_ADMIN_PASSWORD
+```
+
+Valor
+```
+mongodb
+```
+
+
 
 
 
