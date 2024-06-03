@@ -119,7 +119,15 @@ la vista `YAML` permite visualizar la definición del objeto creado en el cluste
 
 ![resultado](../img/202406031005.png)
 
+## Ejercicio 4: Desplegar una imagen de contenedor.
 
+La forma más sencilla de implementar una aplicación en OpenShift Container Platform es ejecutar una imagen de contenedor existente. En la práctica siguiente, implementamos un componente ***front-end*** de una aplicación denominada `national-parks-app`. La aplicación web ofrece un mapa interactivo donde se muestra la ubicación de los principales parques nacionales del mundo.
+
+Nos aseguramos de estar en la `perspectiva desarrollador` (Developer).
+
+Como lo que deseamos hacer es elegir una imagen de contenedor, seleccionamos `Container images` desde la consola web.
+
+![Container images](../img/202406031011.png)
 
 
 

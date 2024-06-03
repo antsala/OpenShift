@@ -13,4 +13,6 @@ El repositorio GIT está organizado en una serie de carpetas. Las presentaciones
 2. Laboratorio 85-B: ***Desplegar la aplicación de parques naturales en crc***
    - Conectar a la consola web.
    - Creación de un proyecto.
+   - Revisión de los permisos.
+   - Desplegar una imagen de contenedor.
    
