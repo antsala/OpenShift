@@ -220,10 +220,28 @@ Desde la perspectiva desarrollador, seleccionamos `+Add` y elegimos `Import from
 ![Import from Git](../img/202406031058.png)
 
 Escribimos la siguiente URL:
+
 ```
 https://github.com/openshift-roadshow/nationalparks-py.git
 ```
 
+Después de la validación, OpenShift detecta las diferentes formas o estrategias de importar la aplicación. Aceptamos la estrategia recomendada, que es `Dockerfile`.
+
+Revisamos el resto de opciones. Editamos las `Labels` y añadimos las siguientes:
+```
+app=national-parks-app
+```
+```
+component=nationalparks
+```
+```
+role=backend
+```
+```
+type=parksmap-backend
+```
+
+Hacemos clic en el botón `Create`.
 
 
 
