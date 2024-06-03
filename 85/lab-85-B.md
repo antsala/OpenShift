@@ -1,4 +1,4 @@
-# Laboratorio 85-B: ***Desplegar la aplicación de parques naturales en OpehShift***.
+# Laboratorio 85-B: ***Desplegar la aplicación de parques naturales en OpenShift***.
 
 La aplicación `national-parks` de OpenShift es un ejemplo de aplicación diseñada para demostrar las capacidades de la plataforma OpenShift, que es una solución de Kubernetes empresarial desarrollada por Red Hat. Esta aplicación suele ser utilizada en tutoriales, demostraciones y talleres para mostrar cómo desplegar, gestionar y escalar aplicaciones en un entorno OpenShift. 
 
