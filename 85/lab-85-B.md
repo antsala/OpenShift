@@ -360,7 +360,7 @@ mongodb
 
 Nombre
 ```
-ONGODB_ADMIN_PASSWORD
+MONGODB_ADMIN_PASSWORD
 ```
 
 Valor
