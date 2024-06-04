@@ -145,6 +145,11 @@ oc new-app quay.io/openshiftroadshow/parksmap:latest --name=parksmap -l "app=nat
 ```
 
 El front-end se ha desplegado.
+
 ![parksmap](../img/202406041118.png)   
+
+Si accedes a la topología desde la consola, podrás comprobar como se va desplegando la aplicación.
+
+![topología](../img/202406041135.png)   
 
 
