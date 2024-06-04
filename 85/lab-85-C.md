@@ -294,6 +294,6 @@ parksmap-antsala-dev.apps.sandbox-m2.ll9k.p1.openshiftapps.com
 
 ![MapView](../img/202406041325.png)
 
+Eliminamos la aplicación desde la consola web.
 
-
-
+Recuerda eliminar también el secreto y el rolebinding para la cuenta de servicio `default` con el rol `view`.
