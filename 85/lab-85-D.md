@@ -48,13 +48,13 @@ git clone https://github.com/antsala/OpenShift.git
 
 Vamos a hacer un despliegue de ***MongoDB*** y ***Mongo-Express*** usando archivos YAML.
 
-MongoDB es el servidor de bases de datos que correrá en un contenedor dentro de un pod de Kubernetes al que llamaremos ***mongodb-deployment***.
+MongoDB es el servidor de bases de datos que correrá en un contenedor dentro de un pod de OpenShift al que llamaremos ***mongodb-deployment***.
 
 Mongo-Express es una ***interfaz gráfica de administración***, que se corre en su propio pod.
 
 Con la idea de que el servidor MongoDB solo pueda ser administrado desde el pod de Mongo-Express implementaremos un servicio interno con nombre ***mongodb-service***.
 
-Al crear el pod de MongoDB nos interesa aportar la credencial del usuario ***root***. La credencial la protegeremos mediante un ***secreto*** de Kubernetes. Ver ***diapositiva 11*** `Despliegue de MongoDB-1`.
+Al crear el pod de MongoDB nos interesa aportar la credencial del usuario ***root***. La credencial la protegeremos mediante un ***secreto*** de OpenShift. Ver ***diapositiva 11*** `Despliegue de MongoDB-1`.
 
 Mongo-Express tendrá su propio pod y deployment, y para conectar con MongoDB, necesitará la URL de la base de datos, así como una credencial (usuario y password). La URL la almacenaremos en un ***Config Map***, mientras que la credendial la leeremos desde el ***secreto***. Ver ***diapositiva 12*** `Despliegue de MongoDB-2`.
 
@@ -80,7 +80,7 @@ nano lab-85-B-mongodb.yaml
 
 Lo primero que debemos asimilar es que este archivo está dividido en dos partes.La línea ***33*** tiene ***---***. En la sintaxis YAML esto indica que se está definiendo un objeto diferente. Por lo tanto, las líneas ***1-32*** definen el objeto ***mongodb-deployment***, mientras que las líneas ***34-44*** definen el objeto ***mongodb-service***.
 
-Esta forma de definir los objetos es genial porque en un solo archivo tenemos todo lo necesario para que Kubernetes despliegue el Backend.
+Esta forma de definir los objetos es genial porque en un solo archivo tenemos todo lo necesario para que OpenShift despliegue el Backend.
 
 El contenido de las líneas más relevantes del archivo YAML para el deployment es el siguiente:
 
@@ -91,9 +91,9 @@ El contenido de las líneas más relevantes del archivo YAML para el deployment 
 * *Línea 18*: El contenedor se llamará ***mongodb***.
 * *Línea 19*: Y la imagen el ***mongo*** (https://hub.docker.com/_/mongo)
 * *Línea 21*: El contenedor del servidor MongoDB trabaja en el puerto ***27017***.
-* *Línea 22*: Importante. Es la primera vez que vamos a usar secretos de Kubernetes inyectados a través de variables de entorno. La sección ***env:*** indica que vamos a definir variables de entorno. Estas las podrá leer la aplicación que corre en el contenedor cuando éste se inicie.
+* *Línea 22*: Importante. Es la primera vez que vamos a usar secretos de OpenShift inyectados a través de variables de entorno. La sección ***env:*** indica que vamos a definir variables de entorno. Estas las podrá leer la aplicación que corre en el contenedor cuando éste se inicie.
 * *Línea 23*: La primera variable de entorno se llama ***MONGO_INITDB_ROOT_USERNAME***, que como vimos en la documentación (https://hub.docker.com/_/mongo) define el nombre de usuario administrador. Esta variable debe tener un valor. 
-* *Línea 24 y 25*: Indicamos que dicho valor se va a tomar desde un secreto de Kubernetes.
+* *Línea 24 y 25*: Indicamos que dicho valor se va a tomar desde un secreto de OpenShift.
 *  Línea 26*: Indicamos el nombre del secreto, en este ejemplo ***mongodb-secret***. Este secreto debe existir en el cluster y estará definido en otro archivo YAML que deberá implementarse antes que este.
 * *Línea 27*: Un secreto puede contener una lista de parejas clave/valor. Por eso en esta línea indicamos el nombre de la clave ***mongodb-root-username***, cuyo valor contendrá el nombre de usuario a utilizar. Nótese que en el archivo YAML es del todo imposible conocer cual es ese nombre de usuario. El uso de secretos permite que el desarrollador no tenga porqué conocer esta información sensible. La unica persona que conocerá realmente este valor será el ***administrador del cluster***, que es quien crea los secretos. (Nota: en este ejercicio también tenemos el rol de administrador del cluster, por lo que tendremos que crear los secretos. Se verá en breve)
 * *Líneas 28-32*: Se define la variable de entorno ***MONGO_INITDB_ROOT_PASSWORD***, que de forma similar a las líneas anteriores, servirá para almacenar el password de MongoDB.
@@ -109,11 +109,11 @@ Ahora procedemos a definir las líneas más relevantes del servicio interno.
 Aun no podemos aplicar este archivo porque daría un error al no existir el secreto ***mongodb-secret***, por lo que procedemos a crearlo.
 
 
-# Ejercicio 3:  ***Crear un secreto en Kubernetes***
+## Ejercicio 3:  ***Crear un secreto en OpenShift***.
 
 Procedemos a crear el secreto que contendrá el usuario y el password de MongoDB.
 
-Kubernetes almacena los secretos codificados en ***Base64*** (no se cifran). Procedemos a generar las codificaciones para el nombre de usuario y la contraseña.
+OpenShift almacena los secretos codificados en ***Base64*** (no se cifran). Procedemos a generar las codificaciones para el nombre de usuario y la contraseña.
 ```
 username=$(echo -n 'mongodb_admin' | base64)
 password=$(echo -n '123WefRR' | base64)
@@ -125,11 +125,9 @@ echo $username
 echo $password
 ```
 
-Abrimos el archivo ***lab-25-B-mongodb-secret-initial.yaml***. (Nota: ***initial*** quiere decir que tendremos que terminar su configuración siguiendo los pasos del laboratorio)
-
 Copiamos el archivo para no perder el original.
 ```
-cp lab-25-B-mongodb-secret-initial.yaml lab-25-B-mongodb-secret.yaml
+cp lab-85-B-mongodb-secret-initial.yaml lab-85-B-mongodb-secret.yaml
 ```
 
 Editamos ***lab-25-B-mongodb-secret.yaml***
@@ -139,9 +137,9 @@ nano lab-25-B-mongodb-secret.yaml
 
 Las líneas mas importantes y su significado son:
 
-* *Línea 2*: El tipo de objeto a crear es un secreto de Kubernetes.
+* *Línea 2*: El tipo de objeto a crear es un secreto de OpenShift.
 * *Línea 4*: Aquí ponemos un nombre al secreto. En este caso ***mongodb-secret***. Los objetos que vayan a usarlo deberán poner este mismo nombre.
-* *Línea 5*: Kubernetes puede guardar secretos de diversa índole, por ejemplo, certificados digitales TLS, cadenas de conexión (URLs) y, en este caso, parejas clave/valor. A este tipo de información se le llama ***Opaque***.
+* *Línea 5*: OpenShift puede guardar secretos de diversa índole, por ejemplo, certificados digitales TLS, cadenas de conexión (URLs) y, en este caso, parejas clave/valor. A este tipo de información se le llama ***Opaque***.
 * *Línea 7*: Esta línea contiene la clave del secreto para el NOMBRE del usuario. En el ejemplo ***mongo-root-username***. Importante. Sustituir el placeholder por el valor del NOMBRE de usuario codificado en Base64.
 
 * *Línea 8*: Esta línea contiene la clave del secreto para el PASSWORD del usuario. En el ejemplo ***mongo-root-password***. Importante. Sustituir el placeholder por el valor del PASSWORD de usuario codificado en Base64.
@@ -238,7 +236,7 @@ mongodb-service   ClusterIP   10.97.22.152   <none>        27017/TCP   8m10s
 
 Que es la típica de un servicio de tipo interno: Para acceder a él, el Frontend tiene que conectar a la ***IP 10.97.22.152*** al puerto ***27017***. 
 
-Usar IPs en las conexiones ***no se debe hacer*** en Kubernetes, así que en breve abstraeremos esa IP y usaremos el nombre del servicio (***mongodb-service***) para conectar. Esto se hará por medio de un ***Config Map***.
+Usar IPs en las conexiones ***no se debe hacer*** en OpenShift, así que en breve abstraeremos esa IP y usaremos el nombre del servicio (***mongodb-service***) para conectar. Esto se hará por medio de un ***Config Map***.
 
 Por último comprobamos que el servicio tiene el endpoint hacia el pod bien configurado.
 ```
