@@ -275,6 +275,11 @@ Como resultado, debe aparecer un mensaje indicando que se han insertado datos.
 
 ![Inserted](../img/202406041236.png)
 
+Añadimos etiquetas a la ruta.
+```
+oc label route nationalparks type=parksmap-backend
+```
+
 Solo queda verificar que todo funciona. Para ello necesitamos obtener la URL del front-end.
 ```
 oc get routes
@@ -286,4 +291,9 @@ En un navegador usamos la URL y probamos. Esta debe ser similar a esta:
 ```
 parksmap-antsala-dev.apps.sandbox-m2.ll9k.p1.openshiftapps.com
 ```
+
+![MapView](../img/202406041325.png)
+
+
+
 
