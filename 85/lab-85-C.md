@@ -83,6 +83,37 @@ Si la conexión es correcta, verás un mensaje como el siguiente:
 
 ![logged](../img/202406041043.png)
 
+Pedimos información sobre los pods en ejecución.
+```
+oc get pods
+```
+
+Pedimos información sobre los nodos.
+```
+oc get nodes
+```
+
+Si te das cuenta, `oc` sigue la misma sintaxis que el comando `kubectl`. En consecuencia podemos usarla de la misma forma.
+
+## Ejercicio 3: Uso de la cli desde la consola web.
+
+Como alternativa a la instalación de la cli, podemos usarla directamente desde la consola web. Para ello hacemos clic en el icono en forma de prompt, tal y como muestra la imagen.
+
+![cli consola](../img/202406041053.png)
+
+Se pide permiso para inicializar la terminal.
+
+![Inicializar terminal](../img/202406041054.png)
+
+Hacemos clic en `Start`. Se desplegará la terminal de la cli.
+
+Puedes probar a ejecutar comandos de `oc`.
+
+![oc version](../img/202406041056.png)
+
+A partir de este momento, puedes optar por usar la cli local o la terminal que ofrece la consola web.
+
+
 
 
 
