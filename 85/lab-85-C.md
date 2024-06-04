@@ -170,7 +170,7 @@ oc create route edge parksmap --service=parksmap
 
 Mostramos las rutas.
 ```
-oc get route
+oc get routes
 ```
 
 ![get route](../img/202406041150.png)   
@@ -201,5 +201,40 @@ oc get pods
 ```
 
 ![get pods](../img/202406041157.png)
+
+Vamos a desplegar el servicio de back-end. Es una aplicación de Python que realiza consultas contra una base de datos de MongoDB para localizar y devolver las coordenadas del mapa de los parques nacionales. El nombre del servicio será `nationalparks`.
+```
+oc new-app python~https://github.com/openshift-roadshow/nationalparks-py.git --name nationalparks -l "app=national-parks-app,component=nationalparks,role=backend,app.kubernetes.io/part-of=national-parks-app,app.kubernetes.io/name=python" --allow-missing-images=true
+```
+
+Creamos una ruta por si deseamos conectar con este servicio.
+```
+oc create route edge nationalparks --service=nationalparks
+```
+
+Mostramos las rutas.
+```
+oc get routes
+```
+Nota: Como `nationalparks` (el back-end) va a ser consumido por el `parksmap` (front-end) no sería estrictamente necesario crearle una ruta para que sea accesible desde fuera del cluster. 
+
+Desplegamos la base de datos de MongoDB. Observemos cómo se inyectan las variables de entorno y se crean las etiquetas (labels)
+```
+oc new-app docker.io/centos/mongodb-36-centos7 --name mongodb-nationalparks -e MONGODB_USER=mongodb -e MONGODB_PASSWORD=mongodb -e MONGODB_DATABASE=mongodb -e MONGODB_ADMIN_PASSWORD=mongodb -l "app.kubernetes.io/part-of=national-parks-app,app.kubernetes.io/name=mongodb"
+```
+
+![Despliegue back](../img/202406041215.png)
+
+Creación del secreto. Necesario para que el front-end pueda conectar con la base de datos.
+```
+oc create secret generic nationalparks-mongodb-parameters --from-literal=DATABASE_SERVICE_NAME=mongodb-nationalparks --from-literal=MONGODB_USER=mongodb --from-literal=MONGODB_PASSWORD=mongodb --from-literal=MONGODB_DATABASE=mongodb --from-literal=MONGODB_ADMIN_PASSWORD=mongodb
+```
+
+Pasamos el secreto a los deployments que están en ejecución. Esto implican que los pods se creen de nuevo para que puedan inyectarse las variables de entorno.
+```
+oc set env --from=secret/nationalparks-mongodb-parameters deploy/nationalparks
+```
+
+
 
 
