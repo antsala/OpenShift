@@ -6,12 +6,14 @@ El despliegue de archivos YAML a través de la CLI de OpenShift  `oc` ofrece una
 
 Los archivos YAML definen la configuración de los recursos de OpenShift de forma declarativa, permitiendo una **descripción precisa y consistente** de los componentes de la aplicación. Al utilizar la CLI para desplegar estos archivos, se automatiza el proceso de creación y configuración, eliminando la necesidad de intervenir manualmente en cada paso. Esto garantiza la **repetibilidad** de los despliegues, asegurando que las aplicaciones se configuren de manera uniforme en diferentes entornos.
 
+IMPORTANTE: Para poder realizar estas prácticas se necesitan permisos que no los suele dar Red Hat en el sandbox. Al tratarse una implementación multitenant no tenemos las credenciales de administrador del cluster y, en consecuencia, ciertas partes de esta práctica no se podrán realizar correctamente. Por esta razón, usaremos la implementación local de OpenShift.
+
 Requisitos:
 
 Una instancia en ejecución de OpenShift.
 
 
-## Ejercicio 1: Clonado de respositorio para realizar prácticas.
+## Ejercicio 1: Clonado de respositorio para realizar prácticas y creación del proyecto.
 
 Iniciamos sesión en la consola web de OpenShift Container Platform con nuestras credenciales de inicio de sesión. 
 
@@ -42,6 +44,15 @@ Puedes probar a ejecutar comandos de `oc`.
 En la terminal escribimos el siguiente comando.
 ```
 git clone https://github.com/antsala/OpenShift.git
+```
+En condiciones normales, debemos crear siempre un `project` por cada nueva aplicación que deseemos instalar. Recordemos que el concepto de proyecto es muy parecido al `namespace` de Kubernetes. El comando a ejecutar sería.
+```
+oc new-project user-getting-started --display-name="Getting Started with OpenShift"
+```
+
+Si estamos usando el sandbox gratuito, Red Hat no permite crear nuevos proyectos, y debemos usar el único proyecto disponible en el sandbox. Para listar los proyectos, escribimos
+```
+oc get projects
 ```
 
 ## Ejercicio 2: ***Descripción del sistema***
@@ -75,7 +86,7 @@ cd ~/OpenShift/85
 
 Abrimos el archivo que contiene el deployment de MongoDB.
 ```
-nano lab-85-B-mongodb.yaml
+nano lab-85-D-mongodb.yaml
 ```
 
 Lo primero que debemos asimilar es que este archivo está dividido en dos partes.La línea ***33*** tiene ***---***. En la sintaxis YAML esto indica que se está definiendo un objeto diferente. Por lo tanto, las líneas ***1-32*** definen el objeto ***mongodb-deployment***, mientras que las líneas ***34-44*** definen el objeto ***mongodb-service***.
@@ -125,14 +136,19 @@ echo $username
 echo $password
 ```
 
-Copiamos el archivo para no perder el original.
+Abrimos otra terminal, pues necesitaremos copiar de una y pegar en otra. En esta segunda terminal, cambiamos de directorio.
 ```
-cp lab-85-B-mongodb-secret-initial.yaml lab-85-B-mongodb-secret.yaml
+cd ~/OpenShift/85
 ```
 
-Editamos ***lab-25-B-mongodb-secret.yaml***
+En la segunda terminal, copiamos el archivo para no perder el original.
 ```
-nano lab-25-B-mongodb-secret.yaml
+cp lab-85-D-mongodb-secret-initial.yaml lab-85-D-mongodb-secret.yaml
+```
+
+Seguimos en la segunda terminal. Editamos ***lab-85-D-mongodb-secret.yaml***
+```
+nano lab-85-D-mongodb-secret.yaml
 ```
 
 Las líneas mas importantes y su significado son:
@@ -140,31 +156,28 @@ Las líneas mas importantes y su significado son:
 * *Línea 2*: El tipo de objeto a crear es un secreto de OpenShift.
 * *Línea 4*: Aquí ponemos un nombre al secreto. En este caso ***mongodb-secret***. Los objetos que vayan a usarlo deberán poner este mismo nombre.
 * *Línea 5*: OpenShift puede guardar secretos de diversa índole, por ejemplo, certificados digitales TLS, cadenas de conexión (URLs) y, en este caso, parejas clave/valor. A este tipo de información se le llama ***Opaque***.
-* *Línea 7*: Esta línea contiene la clave del secreto para el NOMBRE del usuario. En el ejemplo ***mongo-root-username***. Importante. Sustituir el placeholder por el valor del NOMBRE de usuario codificado en Base64.
+* *Línea 7*: Esta línea contiene la clave del secreto para el NOMBRE del usuario. En el ejemplo ***mongo-root-username***. Importante. Sustituir el placeholder por el valor del NOMBRE de usuario codificado en Base64 que está en la primera terminal.
 
-* *Línea 8*: Esta línea contiene la clave del secreto para el PASSWORD del usuario. En el ejemplo ***mongo-root-password***. Importante. Sustituir el placeholder por el valor del PASSWORD de usuario codificado en Base64.
+* *Línea 8*: Esta línea contiene la clave del secreto para el PASSWORD del usuario. En el ejemplo ***mongo-root-password***. Importante. Sustituir el placeholder por el valor del PASSWORD de usuario codificado en Base64 que está en la primera terminal.
 
 Guardar los cambios y salir.
 
+Cerramos la segunda terminal.
 
-Iniciamos ***Minikube*** si no estuviera arriba.
-```
-minikube start
-```
 
 Ahora solo queda agregar el secreto al cluster:
 ```
-kubectl apply -f lab-25-B-mongodb-secret.yaml
+oc apply -f lab-85-D-mongodb-secret.yaml
 ```
 
 Comprobamos que el secreto existe:
 ```
-kubectl get secret mongodb-secret
+oc get secret mongodb-secret
 ```
 
-Pedimos a K8s que nos muestre info sobre el secreto: (Nota: Observar cómo no se muestra el secreto codificado, ya que podríamos decodificarlo de forma simple)
+Pedimos a OpenShift que nos muestre info sobre el secreto: (Nota: Observar cómo no se muestra el secreto codificado, ya que podríamos decodificarlo de forma simple)
 ```
-kubectl describe secret mongodb-secret
+oc describe secret mongodb-secret
 ```
 
 ## Ejercicio 4:  ***Aplicar el deployment de MongoDB***
@@ -172,7 +185,7 @@ kubectl describe secret mongodb-secret
 
 Solo queda aplicar el deployment (y su servicio) para que el Backend quede terminado. Recordemos que el archivo de manifiesto lee los secretos para el usuario root de la base de datos.
 ```
-kubectl apply -f lab-25-B-mongodb.yaml
+oc apply -f lab-85-D-mongodb.yaml
 ```
 
 La salida debería ser similar a esta:
@@ -183,7 +196,7 @@ service/mongodb-service created
 
 Comprobamos los objetos creados:
 ```
-kubectl get deployment mongodb-deployment
+oc get deployment mongodb-deployment
 ```
 
 La salida debe ser similar a esta:
@@ -194,7 +207,7 @@ mongodb-deployment   1/1     1            1           71s
 
 Vemos que el pod del deployment está arriba. Comprobamos el pod.
 ```
-kubectl get pods
+oc get pods
 ```
 
 La salida debe ser similar a esta:
@@ -205,7 +218,7 @@ mongodb-deployment-7bb6c6c4c7-fhrxm   1/1     Running   0          2m48s
 
 El pod está corriendo, y por definición, su único contenedor también. Miramos con detalle qué acciones ha realizado el pod:
 ```
-kubectl describe pod <Poner aquí el nombre del pod>
+oc describe pod <Poner aquí el nombre del pod>
 ```
 
 En la salida, la parte de eventos debería tener algo similar a esto:
@@ -225,7 +238,7 @@ Que indica que el contenedor ha sido creado e iniciado sin problemas.
 
 Recordemos que el archivo YAML también declaraba el servicio. Procedemos a comprobar si se ha creado el objeto
 ```
-kubectl get service mongodb-service
+oc get service mongodb-service
 ```
 
 La salida debe ser similar a esta:
@@ -240,7 +253,7 @@ Usar IPs en las conexiones ***no se debe hacer*** en OpenShift, así que en brev
 
 Por último comprobamos que el servicio tiene el endpoint hacia el pod bien configurado.
 ```
-kubectl describe service mongodb-service
+oc describe service mongodb-service
 ```
 
 En la salida, debemos verificar lo siguiente:
@@ -268,9 +281,9 @@ ME_CONFIG_MONGODB_SERVER        | 'mongo'         | MongoDB container name. Use 
 
 Estas variables de entorno debemos proporcionárselas al contenedor. El nombre y usuario del administrador las leeremos de un ***secreto***, mientras que el servidor se tomará de un ***Config Map***.
 
-Abrimos el archivo ***lab-25-B-mongo-express.yaml***.
+Abrimos el archivo ***lab-25-D-mongo-express.yaml***.
 ```
-nano lab-25-B-mongo-express.yaml
+nano lab-25-D-mongo-express.yaml
 ```
 
 Al igual que pasaba en el Backend, comprobamos que este archivo está dividido en dos partes. La línea 38 tiene ***---***. En la sintaxis YAML esto indica que se está definiendo un objeto diferente. Por lo tanto, las líneas ***1-37*** definen el objeto ***mongo-express-deployment***, mientras que las líneas ***38-51*** definen el objeto ***mongo-express-service***.
@@ -304,7 +317,7 @@ Salimos sin modificar nada.
 
 Aun no podemos aplicar el YAML, porque falta por crear el ***Config Map***. El archivo ya está creado, así que lo abrimos.
 ```
-nano lab-25-B-mongodb-configmap.yaml
+nano lab-25-D-mongodb-configmap.yaml
 ```
 
 * *Línea 2*: Indica que el tipo de objeto a crear es un ***Config Map***.
@@ -313,12 +326,12 @@ nano lab-25-B-mongodb-configmap.yaml
 
 Salimos sin cambiar nada y aplicamos el configmap.
 ```
-kubectl apply -f lab-25-B-mongodb-configmap.yaml
+oc apply -f lab-25-D-mongodb-configmap.yaml
 ```
 
 Comprobamos que se ha creado el objeto.
 ```
-kubectl get configmap mongodb-configmap
+oc get configmap mongodb-configmap
 ```
 
 La salida debe ser similar a esta:
@@ -329,7 +342,7 @@ mongodb-configmap   1      44s
 
 Miramos el contenido.
 ```
-kubectl describe configmap mongodb-configmap
+oc describe configmap mongodb-configmap
 ```
 
 La salida debe ser como esta: (Nota: se muestra solo parte de ella)
@@ -350,17 +363,17 @@ Como se puede observar, a diferencia del secreto, en el configmap se puede ver e
 
 Ahora procedemos a aplicar el YAML del Frontend.
 ```
-kubectl apply -f lab-25-B-mongo-express.yaml
+oc apply -f lab-25-D-mongo-express.yaml
 ```
 
 Comprobamos el deployment:
 ```
-kubectl get deployment mongo-express-deployment
+oc get deployment mongo-express-deployment
 ```
 
 Comprobamos los pods:
 ```
-kubectl get pods
+oc get pods
 ```
 
 La salida debe ser similar a esta:
@@ -372,7 +385,7 @@ mongodb-deployment-7bb6c6c4c7-5b2pw         1/1     Running   0          3m30s
 
 Comprobamos el pod del ***mongo-express***.
 ```
-kubectl get pod <Poner aquí el nombre del pod de mongo-express>
+oc get pod <Poner aquí el nombre del pod de mongo-express>
 ```
 
 La salida debe mostrar que está en 'Running'.
@@ -383,7 +396,7 @@ mongo-express-deployment-68c4748bd6-5h4lc   1/1     Running   0          2m9s
 
 Comprobamos el servicio externo de 'mongo-express'
 ```
-kubectl get service mongo-express-service
+oc get service mongo-express-service
 ```
 
 La salida debe mostrar algo así:
@@ -416,13 +429,13 @@ Cerramos la terminal de ***minikube tunnel***
 
 Eliminamos los objetos del cluster:
 ```
-kubectl delete -f lab-25-B-mongodb.yaml
-kubectl delete -f lab-25-B-mongo-express.yaml
-kubectl delete -f lab-25-B-mongodb-configmap.yaml
-kubectl delete -f lab-25-B-mongodb-secret.yaml
+oc delete -f lab-25-D-mongodb.yaml
+oc delete -f lab-25-D-mongo-express.yaml
+oc delete -f lab-25-D-mongodb-configmap.yaml
+oc delete -f lab-25-D-mongodb-secret.yaml
 ```
 
 Comprobamos:
 ```
-kubectl get all 
+oc get all 
 ```
