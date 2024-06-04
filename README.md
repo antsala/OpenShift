@@ -10,7 +10,7 @@ El repositorio GIT está organizado en una serie de carpetas. Las presentaciones
 1. Laboratorio 85-A: ***Instalación de CodeReady Containers en equipo de usuario***. Los ejercicios a realizar son:
    - Instalación de OpenShift local.
 
-2. Laboratorio 85-B: ***Desplegar la aplicación de parques naturales en OpenShift***
+2. Laboratorio 85-B: ***Desplegar la aplicación de parques naturales en OpenShift***.
    - Conectar a la consola web.
    - Creación de un proyecto.
    - Revisión de los permisos.
@@ -20,5 +20,9 @@ El repositorio GIT está organizado en una serie de carpetas. Las presentaciones
    - Despliegue del servicio de backend.
    - Conectar con la base de datos.
    - Cargar las tablas de la base de datos desde el servicio web.
+
+3. Laboratorio 85-C: ***Uso de la cli de OpenShift***.
+   - ¿Qué es la cli de OpenShift?
+   - Conexión al Control Plane desde la cli.
 
    

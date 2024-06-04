@@ -39,7 +39,7 @@ La perspectiva del desarrollador proporciona flujos de trabajo específicos para
 
 ## Ejercicio 2: Creación de un proyecto.
 
-Nota: Esta paso solo se puede hacer el el cluster real o en la implementación local de OpenShift. Si estamos trabajando con en sandbox, Red Hat ya ha creado el proyecto por nosotros y no nos dejará crear proyectos nuevos.
+Nota: Este paso solo se puede hacer en el cluster real o en la implementación local de OpenShift. Si estamos trabajando con en sandbox, Red Hat ya ha creado el proyecto por nosotros y no nos dejará crear proyectos nuevos.
 
 Los `proyectos` son extensiones de OpenShift Container Platform a los `espacios de nombres` de Kubernetes. 
 
@@ -194,7 +194,7 @@ La interfaz gráfica muestra la página de `Topology`, donde podemos ver como el
 
 ## Ejercicio 5: Examinar el pod.
 
-OpenShift Container Platform aprovecha el concepto pod de Kubernetes, que como bien sabemos está formado por uno o más contenedores. El pod es la unidad más pequeña de planificación.
+OpenShift Container Platform aprovecha el concepto de `pod` de Kubernetes, que como bien sabemos está formado por uno o más contenedores. El pod es la unidad más pequeña de planificación.
 
 El panel Información general le permite acceder a muchas características de la implementación. Las pestañas Detalles y Recursos le permiten escalar los pods de la aplicación, comprobar el estado de la compilación, los servicios y las rutas. Este panel es accesible desde el icono en forma de triángulo que se puede observar en la imagen.
 
@@ -274,7 +274,10 @@ La elección entre importar una aplicación utilizando un `Dockerfile` o una `Bu
 - **Caso de uso**: Utilizamos un Dockerfile cuando necesitamos control detallado sobre el entorno de compilación o cuando trabajamos con un entorno que no se ajusta a una Builder Image preexistente. Optamos por Builder Images cuando buscas una solución rápida y estandarizada para construir y desplegar la aplicación con menos esfuerzo inicial.
 
 
-Revisamos el resto de opciones. Editamos las `Labels` y añadimos las siguientes:
+IMPORTANTE: Revisamos el resto de opciones, el tipo de despliegue es un `Deployment`. Si usamos el sandbox en AWS, se predetermina a `Serverless`. Cambiarlo a `Deployment`.
+
+
+ Editamos las `Labels` y añadimos las siguientes:
 ```
 app=national-parks-app
 ```
