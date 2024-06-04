@@ -24,5 +24,7 @@ El repositorio GIT está organizado en una serie de carpetas. Las presentaciones
 3. Laboratorio 85-C: ***Uso de la cli de OpenShift***.
    - ¿Qué es la cli de OpenShift?
    - Conexión al Control Plane desde la cli.
+   - Uso de la cli desde la consola web.
+   - Despliegue de la app nationalparks desde la cli.
 
    

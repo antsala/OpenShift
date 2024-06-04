@@ -113,9 +113,38 @@ Puedes probar a ejecutar comandos de `oc`.
 
 A partir de este momento, puedes optar por usar la cli local o la terminal que ofrece la consola web.
 
+## Ejercicio 4: Despliegue de la app nationalparks desde la cli
 
+Una vez que hemos conectado la cli al servidor de Openshift, podemos realizar los despliegues usando exclusivamenta la línea de comandos. Vamos a volver a desplegar la aplicación de Parques Naturales.
 
+En condiciones normales, debemos crear siempre un `project` por cada nueva aplicación que deseemos instalar. Recordemos que el concepto de proyecto es muy parecido al `namespace` de Kubernetes. El comando a ejecutar sería.
+```
+oc new-project user-getting-started --display-name="Getting Started with OpenShift"
+```
 
+Si estamos usando el sandbox gratuito, Red Hat no permite crear nuevos proyectos, y debemos usar el único proyecto disponible en el sandbox. Para listar los proyectos, escribimos
+```
+oc get projects
+```
 
+![get projects](../img/202406041105.png)   
+
+Si usas el sandbox, el nombre del proyecto tiene la forma de tu nombre de usuario de Red Hat y la extensión `-dev`. Este proyecto ya está seleccionado.
+
+OpenShift Container Platform crea automáticamente algunas cuentas de servicio especiales en cada proyecto. La cuenta de servicio predeterminada `default` asume la responsabilidad de ejecutar los pods. OpenShift Container Platform usa e inserta esta cuenta de servicio en cada pod que se inicia.
+
+Vamos a proceder a asignar el rol `view` a la cuenta de servicio `default` para el proyecto (espacio de nombres) `tu_usuario-dev`.
+Nota: pon tu espacio de nombres (proyecto) en el comando.
+```
+oc adm policy add-role-to-user view -z default -n antsala-dev
+```
+
+Vamos a desplegar el front-end de la aplicación, que es un componente de la aplicación `national-parks-app`.
+```
+oc new-app quay.io/openshiftroadshow/parksmap:latest --name=parksmap -l "app=national-parks-app,component=parksmap,role=frontend,app.kubernetes.io/part-of=national-parks-app"
+```
+
+El front-end se ha desplegado.
+![parksmap](../img/202406041118.png)   
 
 

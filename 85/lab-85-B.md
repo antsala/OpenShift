@@ -489,6 +489,8 @@ Para eliminar los componentes, hacemos clic en los elementos de la interfaz grá
 
 Nota: Los secretos no se eliminan al destruir la aplicación.
 
+También sería conveniente eliminar el `rolebinding` que creamos a la cuenta de servicio `default`.
+
 
 
 
