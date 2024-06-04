@@ -150,7 +150,7 @@ El front-end se ha desplegado.
 
 Si accedes a la topología desde la consola, podrás comprobar como se va desplegando la aplicación.
 
-![topología](../img/202406041135.png)   
+![topología](../img/202406041304.png)   
 
 Procedemos a crear la ruta. Como ya vimos una `route` permite a los clientes externos acceder a la aplicación del cluster. 
 
