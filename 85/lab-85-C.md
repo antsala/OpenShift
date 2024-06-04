@@ -163,7 +163,7 @@ Como podemos ver, el servicio `parkmap` es de tipo interno (`clusterIP`) y en co
 
 ![Servicios](../img/202406041147.png)   
 
-Creamos la routa para exponer el servicio.
+Creamos la ruta para exponer el servicio.
 ```
 oc create route edge parksmap --service=parksmap
 ```
@@ -201,6 +201,16 @@ oc get pods
 ```
 
 ![get pods](../img/202406041157.png)
+
+
+Dejamos el front-end en 1 instancias.
+```
+oc scale --current-replicas=2 --replicas=1 deployment/parksmap
+```
+
+```
+oc get pods
+```
 
 Vamos a desplegar el servicio de back-end. Es una aplicación de Python que realiza consultas contra una base de datos de MongoDB para localizar y devolver las coordenadas del mapa de los parques nacionales. El nombre del servicio será `nationalparks`.
 ```
