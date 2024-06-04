@@ -69,7 +69,7 @@ La consola muestra enlaces para poder descargar la versión que más nos interes
 
 ## Ejercicio 2: Conexión al Control Plane desde la cli.
 
-Para poder conectar la cli debemos conocer la URL de la API Server. Para ello, desde la consola web, hacemos clic en el icono de la interrogación y seleccionamos `Command Line Tools`. Se mostrará un enlace con eñ comando de `login`.
+Para poder conectar la cli debemos conocer la URL de la API Server. Para ello, desde la consola web, hacemos clic en el icono de la interrogación y seleccionamos `Command Line Tools`. Se mostrará un enlace con el comando de `login`.
 
 ![URL login](../img/202406041033.png)
 
@@ -78,6 +78,11 @@ Hacemos clic en él y nos logamos en el Servidor. Aparecerá una nueva pantalla 
 ![oc login](../img/202406041038.png)
 
 Copia el comando de login y ejecútalo en tu terminal.
+
+Si la conexión es correcta, verás un mensaje como el siguiente:
+
+![logged](../img/202406041043.png)
+
 
 
 
