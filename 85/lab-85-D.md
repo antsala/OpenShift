@@ -13,7 +13,7 @@ Requisitos:
 Una instancia en ejecución de OpenShift.
 
 
-## Ejercicio 1: Clonado de respositorio para realizar prácticas y creación del proyecto.
+## Ejercicio 1: Clonado de respositorio para realizar prácticas y seleccion del espacio de nombres.
 
 Iniciamos sesión en la consola web de OpenShift Container Platform con nuestras credenciales de inicio de sesión. 
 
@@ -45,14 +45,13 @@ En la terminal escribimos el siguiente comando.
 ```
 git clone https://github.com/antsala/OpenShift.git
 ```
-En condiciones normales, debemos crear siempre un `project` por cada nueva aplicación que deseemos instalar. Recordemos que el concepto de proyecto es muy parecido al `namespace` de Kubernetes. El comando a ejecutar sería.
-```
-oc new-project user-getting-started --display-name="Getting Started with OpenShift"
-```
+En condiciones normales, debemos crear siempre un `project` por cada nueva aplicación que deseemos instalar. Recordemos que el concepto de proyecto es muy parecido al `namespace` de Kubernetes. 
 
-Si estamos usando el sandbox gratuito, Red Hat no permite crear nuevos proyectos, y debemos usar el único proyecto disponible en el sandbox. Para listar los proyectos, escribimos
+Si estamos usando el sandbox gratuito, Red Hat no permite crear nuevos proyectos. Tampoco permite asignar roles de administrador y debemos usar el único proyecto disponible en el sandbox. Para listar los proyectos, escribimos. Por esta razón, algunas partes de este laboratorio no podrán funcionar si no tenemos permisos efectivos de administrador en el cluster.
+
+Vamos usar el espacio de nombres o proyecto `default`.
 ```
-oc get projects
+oc project default
 ```
 
 ## Ejercicio 2: ***Descripción del sistema***
