@@ -152,4 +152,54 @@ Si accedes a la topología desde la consola, podrás comprobar como se va desple
 
 ![topología](../img/202406041135.png)   
 
+Procedemos a crear la ruta. Como ya vimos una `route` permite a los clientes externos acceder a la aplicación del cluster. 
+
+Mostramos los servicios para visualizar 
+```
+oc get service
+```
+
+Como podemos ver, el servicio `parkmap` es de tipo interno (`clusterIP`) y en consecuencia no se puede alcanzar desde fuera del cluster.
+
+![Servicios](../img/202406041147.png)   
+
+Creamos la routa para exponer el servicio.
+```
+oc create route edge parksmap --service=parksmap
+```
+
+Mostramos las rutas.
+```
+oc get route
+```
+
+![get route](../img/202406041150.png)   
+
+Como podemos ver, la ruta mueve el tráfico hacia el servicio `parksmap`. También proporciona una DNS para poder conectar.
+
+Visualizamos los pods de la aplicación.
+```
+oc get pods
+```
+
+![get pods](../img/202406041153.png)
+
+Comprobamos que el pod del front-end está en `running`.
+
+También podemos ejecutar comandos, al estilo de `kubectl`.
+```
+oc describe pods
+```
+
+Al igual que hicimos desde la consola web, procedemos a escalar el front-end a 2 instancias.
+```
+oc scale --current-replicas=1 --replicas=2 deployment/parksmap
+```
+
+```
+oc get pods
+```
+
+![get pods](../img/202406041157.png)
+
 
