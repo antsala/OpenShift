@@ -230,11 +230,39 @@ Creación del secreto. Necesario para que el front-end pueda conectar con la bas
 oc create secret generic nationalparks-mongodb-parameters --from-literal=DATABASE_SERVICE_NAME=mongodb-nationalparks --from-literal=MONGODB_USER=mongodb --from-literal=MONGODB_PASSWORD=mongodb --from-literal=MONGODB_DATABASE=mongodb --from-literal=MONGODB_ADMIN_PASSWORD=mongodb
 ```
 
-Pasamos el secreto a los deployments que están en ejecución. Esto implican que los pods se creen de nuevo para que puedan inyectarse las variables de entorno.
+Pasamos el secreto a los deployments que están en ejecución. Esto implican que los pods se reinicien para que puedan inyectarse las variables de entorno.
 ```
 oc set env --from=secret/nationalparks-mongodb-parameters deploy/nationalparks
 ```
 
+Para comprobar el estado de los despliegues ejecutamos:
+```
+oc rollout status deployment nationalparks
+```
 
+```
+oc rollout status deployment mongodb-nationalparks
+```
+
+Cargar los datos en la base de datos. 
+
+Para ello primero debemos localizar el pod de la aplicación de Python.
+```
+oc get pods
+```
+
+Localizamos el pod apropiado.
+
+![get pods](../img/202406041232.png)
+
+Ejecutamos en ese por el comando de carga de la base de datos.
+Nota: Asegura que pones en identificador del pod correcto.
+```
+oc exec pod/nationalparks-f89c94ff5-7vdw5 -- curl -s http://localhost:8080/ws/data/load
+```
+
+Como resultado, debe aparecer un mensaje indicando que se han insertado datos.
+
+![Inserted](../img/202406041236.png)
 
 
