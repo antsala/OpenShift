@@ -54,7 +54,7 @@ Vamos usar el espacio de nombres o proyecto `default`.
 oc project default
 ```
 
-## Ejercicio 2: ***Descripción del sistema***
+## Ejercicio 2: ***Descripción del sistema y creación de la aplicación***
 
 Vamos a hacer un despliegue de ***MongoDB*** y ***Mongo-Express*** usando archivos YAML.
 
@@ -68,7 +68,7 @@ Al crear el pod de MongoDB nos interesa aportar la credencial del usuario ***roo
 
 Mongo-Express tendrá su propio pod y deployment, y para conectar con MongoDB, necesitará la URL de la base de datos, así como una credencial (usuario y password). La URL la almacenaremos en un ***Config Map***, mientras que la credendial la leeremos desde el ***secreto***. Ver ***diapositiva 12*** `Despliegue de MongoDB-2`.
 
-Por último, para hacer accesible al usuario la conexión al pod Mongo-Express, crearemos una `ruta` al ***servicio de monfo express***, del frontend. Ver ***diapositiva 13*** `Despliegue de MongoDB-3`.
+Por último, para hacer accesible al usuario la conexión al pod Mongo-Express, crearemos una `ruta` al ***servicio de mongo express***, del frontend. Ver ***diapositiva 13*** `Despliegue de MongoDB-3`.
 
 
 # Ejercicio 2:  ***Crear la base de datos MongoDB***
@@ -411,7 +411,6 @@ NAME                    HOST/PORT                                        PATH   
 mongo-express-service   mongo-express-service-default.apps-crc.testing          mongo-express-service   8081
 ```
 
-
 Para probar, conectar con en navegador a la URL indicada por `HOST/PORT' con las credenciales:
 Nota: La URL puede variar en función del tipo de cluster que se esté usando (local/sandbox)
 ```
@@ -432,6 +431,11 @@ oc delete -f lab-85-D-mongodb.yaml
 oc delete -f lab-85-D-mongo-express.yaml
 oc delete -f lab-85-D-mongodb-configmap.yaml
 oc delete -f lab-85-D-mongodb-secret.yaml
+```
+
+Borramos también la ruta.
+```
+oc delete route.route.openshift.io/mongo-express-service
 ```
 
 Comprobamos:
