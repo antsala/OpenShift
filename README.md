@@ -29,6 +29,6 @@ El repositorio GIT está organizado en una serie de carpetas. Las presentaciones
 
 4. Laboratorio 85-D: ***Despliegue de archivos YAML OpenShift***.
    - Clonado de respositorio para realizar prácticas y creación del proyecto.
-   - Descripción del sistema.
+   - Descripción del sistema y creación de la aplicación.
    - Crear un secreto en OpenShift.
    
