@@ -49,10 +49,32 @@ En condiciones normales, debemos crear siempre un `project` por cada nueva aplic
 
 Si estamos usando el sandbox gratuito, Red Hat no permite crear nuevos proyectos. Tampoco permite asignar roles de administrador y debemos usar el único proyecto disponible en el sandbox. Para listar los proyectos, escribimos. Por esta razón, algunas partes de este laboratorio no podrán funcionar si no tenemos permisos efectivos de administrador en el cluster.
 
-Vamos usar el espacio de nombres o proyecto `default`.
+
+Vamos usar el espacio de nombres o proyecto `user-getting-started`.
 ```
-oc project default
+oc new-project user-getting-started --display-name="User Getting Started" --description="Proyecto para nuevos usuarios"
 ```
+
+Debemos asignar los siguientes permisos para que los pods funcionen bien.
+Nota: Esto no se puede hacer en el sandbox porque no podemos logarnos como administrador.
+```
+oc adm policy add-scc-to-user anyuid system:serviceaccount:default
+```
+
+```
+oc adm policy add-scc-to-group anyuid system:authenticated
+```
+
+Creamos un rol que asigna todos los verbos.
+```
+oc create role mi-rol --verb=get,list,watch,create,update,patch,delete --resource=*
+```
+
+Asignamos, por medio de un `rolebinding`, el rol a la cuenta de servicio `default` en el espacio de nombres `user-getting-started`
+```
+oc create rolebinding mi-binding --role=mi-rol --serviceaccount=user-getting-started:default
+```
+
 
 ## Ejercicio 2: ***Descripción del sistema y creación de la aplicación***
 
@@ -111,8 +133,7 @@ El contenido de las líneas más relevantes del archivo YAML para el deployment 
 
 Ahora procedemos a definir las líneas más relevantes del servicio interno.
 
-* *Línea 35*: El objeto es un servicio.
-* *Líneas 36 y 27*: En los metadatos vemos que aparece el nombre del servicio ***mongodb-service***, pero NO aparece el parámetro ***type: LoadBalancer***, por lo tanto es un ***servicio interno***.
+* *Línea 35*: El objeto es un servicio, como NO aparece el parámetro ***type: LoadBalancer***, es un ***servicio interno***.
 * *Líneas 39 y 40*:   Se utiliza la etiqueta ***app: mongodb*** como selector. Esta etiqueta es la misma que se ha declarado en el deployment y en el pod.
 * *Líneas 41-44*: Se usará protocolo de transporte TCP. El puerto externo del servicio es el ***27017*** y el tráfico sera reenviado al mismo puerto del (único) pod
 
@@ -162,7 +183,6 @@ Las líneas mas importantes y su significado son:
 Guardar los cambios y salir.
 
 Cerramos la segunda terminal.
-
 
 Ahora solo queda agregar el secreto al cluster:
 ```
@@ -264,7 +284,7 @@ En la salida, debemos verificar lo siguiente:
 
 ## Ejercicio 5: ***Crear el deployment Mongo Express***
 
-***Mongo Express*** es un Frontend gráfico para administrar MongoDB. En este ejercicio explicaremos el achivo YAML que define su deployment y un servicio externo de tipo ***LoadBalancer***. 
+***Mongo Express*** es un Frontend gráfico para administrar MongoDB. En este ejercicio explicaremos el achivo YAML que define su deployment y un servicio interno que luego será expuesto a través de una `route`.
 
 Para que ***Mongo Express*** pueda conectar con el pod de Backend, usaremos un ***Config Map***.
 La imagen de contenedor que usaremos es ***mongo-express*** que está aquí: (https://hub.docker.com/_/mongo-express)
@@ -299,7 +319,7 @@ Ahora procedemos a definir las líneas más relevantes del servicio externo.
 
 * *Línea 40*: El tipo de objeto es un servicio.
 * *Línea 42*: Se llamará ***mongo-express-service***.
-* *Línea 44*: Es de tipo ***LoadBalancer***, es decir de tipo externo.
+* *Línea 44*: Es de tipo ***ClusterIP***, es decir de tipo interno.
 * *Línea 45 y 46*: Mediante el selector, se asociará con el deployment y el pod que tenga definida la etiqueta ***app: mongo-express***.
 *  Línea 47-50*: Protocolo TCP, puerto externo ***8081***, puerto del contenedor ***8081***.
 
@@ -411,7 +431,7 @@ NAME                    HOST/PORT                                        PATH   
 mongo-express-service   mongo-express-service-default.apps-crc.testing          mongo-express-service   8081
 ```
 
-Para probar, conectar con en navegador a la URL indicada por `HOST/PORT' con las credenciales:
+Para probar, conectar con en navegador a la URL indicada por `HOST/PORT' (con http) con las credenciales:
 Nota: La URL puede variar en función del tipo de cluster que se esté usando (local/sandbox)
 ```
 admin
