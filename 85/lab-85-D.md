@@ -13,7 +13,7 @@ Requisitos:
 Una instancia en ejecución de OpenShift.
 
 
-## Ejercicio 1: Clonado de respositorio para realizar prácticas y seleccion del espacio de nombres.
+## Ejercicio 1: Clonado de repositorio para realizar prácticas y seleccion del espacio de nombres.
 
 Iniciamos sesión en la consola web de OpenShift Container Platform con nuestras credenciales de inicio de sesión. 
 
@@ -269,16 +269,7 @@ En la salida, debemos verificar lo siguiente:
 Para que ***Mongo Express*** pueda conectar con el pod de Backend, usaremos un ***Config Map***.
 La imagen de contenedor que usaremos es ***mongo-express*** que está aquí: (https://hub.docker.com/_/mongo-express)
 
-En la documentación, en la sección ***Configuration*** aparecen las variables de entorno que debemos configurar para que funcione. A continuación ponemos un extracto de ella.
-```
-...
-ME_CONFIG_MONGODB_ADMINUSERNAME | ''              | MongoDB admin username
-ME_CONFIG_MONGODB_ADMINPASSWORD | ''              | MongoDB admin password
-...
-ME_CONFIG_MONGODB_SERVER        | 'mongo'         | MongoDB container name. Use comma delimited list of host names for replica sets.
-```
 
-Estas variables de entorno debemos proporcionárselas al contenedor. El nombre y usuario del administrador las leeremos de un ***secreto***, mientras que el servidor se tomará de un ***Config Map***.
 
 Abrimos el archivo ***lab-25-D-mongo-express.yaml***.
 ```
