@@ -271,9 +271,9 @@ La imagen de contenedor que usaremos es ***mongo-express*** que está aquí: (ht
 
 
 
-Abrimos el archivo ***lab-25-D-mongo-express.yaml***.
+Abrimos el archivo ***lab-85-D-mongo-express.yaml***.
 ```
-nano lab-25-D-mongo-express.yaml
+nano lab-85-D-mongo-express.yaml
 ```
 
 Al igual que pasaba en el Backend, comprobamos que este archivo está dividido en dos partes. La línea 38 tiene ***---***. En la sintaxis YAML esto indica que se está definiendo un objeto diferente. Por lo tanto, las líneas ***1-37*** definen el objeto ***mongo-express-deployment***, mientras que las líneas ***38-51*** definen el objeto ***mongo-express-service***.
@@ -307,7 +307,7 @@ Salimos sin modificar nada.
 
 Aun no podemos aplicar el YAML, porque falta por crear el ***Config Map***. El archivo ya está creado, así que lo abrimos.
 ```
-nano lab-25-D-mongodb-configmap.yaml
+nano lab-85-D-mongodb-configmap.yaml
 ```
 
 * *Línea 2*: Indica que el tipo de objeto a crear es un ***Config Map***.
@@ -316,7 +316,7 @@ nano lab-25-D-mongodb-configmap.yaml
 
 Salimos sin cambiar nada y aplicamos el configmap.
 ```
-oc apply -f lab-25-D-mongodb-configmap.yaml
+oc apply -f lab-85-D-mongodb-configmap.yaml
 ```
 
 Comprobamos que se ha creado el objeto.
@@ -353,7 +353,7 @@ Como se puede observar, a diferencia del secreto, en el configmap se puede ver e
 
 Ahora procedemos a aplicar el YAML del Frontend.
 ```
-oc apply -f lab-25-D-mongo-express.yaml
+oc apply -f lab-85-D-mongo-express.yaml
 ```
 
 Comprobamos el deployment:
@@ -419,10 +419,10 @@ Cerramos la terminal de ***minikube tunnel***
 
 Eliminamos los objetos del cluster:
 ```
-oc delete -f lab-25-D-mongodb.yaml
-oc delete -f lab-25-D-mongo-express.yaml
-oc delete -f lab-25-D-mongodb-configmap.yaml
-oc delete -f lab-25-D-mongodb-secret.yaml
+oc delete -f lab-85-D-mongodb.yaml
+oc delete -f lab-85-D-mongo-express.yaml
+oc delete -f lab-85-D-mongodb-configmap.yaml
+oc delete -f lab-85-D-mongodb-secret.yaml
 ```
 
 Comprobamos:
