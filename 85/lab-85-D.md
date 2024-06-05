@@ -392,19 +392,28 @@ oc get service mongo-express-service
 La salida debe mostrar algo así:
 ```
 NAME                    TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
-mongo-express-service   LoadBalancer   10.104.215.72   <pending>     8081:30000/TCP   3m47s
+mongo-express-service   ClusterIP      10.104.215.72   <none>        8081/TCP   3m47s
 ```
 
-El servicio es de tipo ***load balancer*** y la EXTERNAL-IP está en ***Pending***. Cuando se nos asigne la EXTERNAL-IP, debemos conectar con el navegador al puerto ***8081***. De este forma, el tráfico iria así:
-
-Navegador --> EXTERNAL-IP:8081  --> mongo-express-service --> endpoint_pod:8081
-
-En otra terminal ejecutamos:
+Es el momento de crear una `route` para exponer el servicio `mongo-express-service`. De esta forma conseguiremos poder acceder al front-end desde fuera del cluster. Escribimos.
 ```
-minikube tunnel
+oc expose service mongo-express-service
 ```
 
-Para probar, conectar al puerto 8081 de la IP externa. las credenciales son:
+Podemos ver las rutas con el siguiente comando:
+```
+oc get routes
+```
+
+En la salida del comando es similar a la siguiente:
+```
+NAME                    HOST/PORT                                        PATH   SERVICES                PORT
+mongo-express-service   mongo-express-service-default.apps-crc.testing          mongo-express-service   8081
+```
+
+
+Para probar, conectar con en navegador a la URL indicada por `HOST/PORT' con las credenciales:
+Nota: La URL puede variar en función del tipo de cluster que se esté usando (local/sandbox)
 ```
 admin
 ```
